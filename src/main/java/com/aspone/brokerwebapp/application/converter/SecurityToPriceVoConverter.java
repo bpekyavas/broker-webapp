@@ -9,9 +9,9 @@ public class SecurityToPriceVoConverter {
 
     public PriceVo convert(Security security) {
         PriceVo priceVo = new PriceVo();
-        priceVo.setPrice(security.getRate());
-        priceVo.setBestAsk(security.getRate().add(security.getSpread()));
-        priceVo.setBestBid(security.getRate().subtract(security.getSpread()));
+        priceVo.setPrice(security.getPrice());
+        priceVo.setBestAsk(security.getBestAsk());
+        priceVo.setBestBid(security.getBestBid());
 
         return priceVo;
     }

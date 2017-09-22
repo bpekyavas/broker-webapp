@@ -28,9 +28,10 @@ public class PriceService {
         return securityToPriceVoConverter.convert(security);
     }
 
-    public void updatePrice(Long securityId, BigDecimal price) {
+    public void updateSpread(Long securityId, BigDecimal spread) {
         Security security = Optional.ofNullable(securityRepository.findOne(securityId))
                 .orElseThrow(() -> new SecurityNotFoundBusinessException("Security is not found!"));
+        security.setSpread(spread);
         try {
             securityRepository.save(security);
         } catch (Exception e) {

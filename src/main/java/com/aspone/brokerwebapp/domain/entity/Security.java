@@ -15,8 +15,8 @@ public class Security {
     @Column(name="code")
     private String code;
 
-    @Column(name="rate")
-    private BigDecimal rate;
+    @Column(name="price")
+    private BigDecimal price;
 
     @Column(name="spread")
     private BigDecimal spread;
@@ -37,12 +37,12 @@ public class Security {
         this.code = code;
     }
 
-    public BigDecimal getRate() {
-        return rate;
+    public BigDecimal getPrice() {
+        return price;
     }
 
-    public void setRate(BigDecimal rate) {
-        this.rate = rate;
+    public void setPrice(BigDecimal price) {
+        this.price = price;
     }
 
     public BigDecimal getSpread() {
@@ -51,5 +51,13 @@ public class Security {
 
     public void setSpread(BigDecimal spread) {
         this.spread = spread;
+    }
+
+    public BigDecimal getBestBid(){
+        return price.subtract(getSpread());
+    }
+
+    public BigDecimal getBestAsk(){
+        return price.add(getSpread());
     }
 }

@@ -1,12 +1,14 @@
 package com.aspone.brokerwebapp.domain.service;
 
 import com.aspone.brokerwebapp.application.converter.TradeListToResponseConverter;
+import com.aspone.brokerwebapp.application.model.request.TradeRequest;
 import com.aspone.brokerwebapp.application.model.response.TradeListResponse;
+import com.aspone.brokerwebapp.domain.entity.Security;
 import com.aspone.brokerwebapp.domain.entity.Trade;
 import com.aspone.brokerwebapp.domain.entity.Trader;
-import com.aspone.brokerwebapp.domain.exception.TradeNotFoundBusinessException;
-import com.aspone.brokerwebapp.domain.exception.TradeSaveBusinessException;
-import com.aspone.brokerwebapp.domain.exception.TraderNotFoundBusinessException;
+import com.aspone.brokerwebapp.domain.entity.enumtype.Side;
+import com.aspone.brokerwebapp.domain.exception.*;
+import com.aspone.brokerwebapp.domain.repository.SecurityRepository;
 import com.aspone.brokerwebapp.domain.repository.TradeRepository;
 import com.aspone.brokerwebapp.domain.repository.TraderRepository;
 import org.springframework.stereotype.Service;
@@ -23,16 +25,31 @@ public class TradeService {
 
     private TradeRepository tradeRepository;
     private TraderRepository traderRepository;
+    private SecurityRepository securityRepository;
     private TradeListToResponseConverter tradeListToResponseConverter;
 
-    public TradeService(TradeRepository tradeRepository, TraderRepository traderRepository, TradeListToResponseConverter tradeListToResponseConverter) {
+    public TradeService(TradeRepository tradeRepository, TraderRepository traderRepository, SecurityRepository securityRepository, TradeListToResponseConverter tradeListToResponseConverter) {
         this.tradeRepository = tradeRepository;
         this.traderRepository = traderRepository;
+        this.securityRepository = securityRepository;
         this.tradeListToResponseConverter = tradeListToResponseConverter;
     }
 
-    public void match(Long buyerId, BigDecimal price, Long quantity) {
-        Trade trade = createTrade(buyerId, price, quantity);
+    public void match(TradeRequest tradeRequest) {
+        Security security = Optional.ofNullable(securityRepository.findOne(tradeRequest.getSecurityId()))
+                .orElseThrow(() -> new SecurityNotFoundBusinessException("Security is not found!"));
+        BigDecimal price = Side.BUY.equals(tradeRequest.getSide()) ? security.getBestAsk() : security.getBestBid();
+        saveTrade(tradeRequest, price);
+        security.setPrice(price);
+        try {
+            securityRepository.save(security);
+        } catch (Exception e) {
+            throw new SecurityUpdateBusinessException("Security price could not be updated");
+        }
+    }
+
+    private void saveTrade(TradeRequest tradeRequest, BigDecimal price) {
+        Trade trade = createTrade(tradeRequest,price);
         try {
             tradeRepository.save(trade);
         } catch (Exception e) {
@@ -40,14 +57,19 @@ public class TradeService {
         }
     }
 
-    private Trade createTrade(Long buyerId, BigDecimal price, Long quantity) {
-        Trader trader = Optional.ofNullable(traderRepository.findOne(buyerId))
+    private Trade createTrade(TradeRequest tradeRequest, BigDecimal price) {
+        Security security = Optional.ofNullable(securityRepository.findOne(tradeRequest.getSecurityId()))
+                .orElseThrow(() -> new SecurityNotFoundBusinessException("Security is not found!"));
+        Trader trader = Optional.ofNullable(traderRepository.findOne(tradeRequest.getTraderId()))
                 .orElseThrow(() -> new TraderNotFoundBusinessException("Trader is not found!"));
+
         Trade trade = new Trade();
-        trade.setBuyer(trader);
+        trade.setSecurity(security);
+        trade.setTrader(trader);
         trade.setDate(new Date());
         trade.setPrice(price);
-        trade.setQuantity(quantity);
+        trade.setQuantity(tradeRequest.getQuantity());
+        trade.setSide(tradeRequest.getSide());
 
         return trade;
     }
@@ -55,7 +77,7 @@ public class TradeService {
     public TradeListResponse retrieveTrades(Long traderId) {
         Trader trader = Optional.ofNullable(traderRepository.findOne(traderId))
                 .orElseThrow(() -> new TraderNotFoundBusinessException("Trader is not found!"));
-        List<Trade> tradeList = Optional.ofNullable(tradeRepository.findAllByBuyer(trader))
+        List<Trade> tradeList = Optional.ofNullable(tradeRepository.findAllByTrader(trader))
                 .orElseThrow(() -> new TradeNotFoundBusinessException("Trade is not found!"));
         return tradeListToResponseConverter.convert(tradeList);
     }

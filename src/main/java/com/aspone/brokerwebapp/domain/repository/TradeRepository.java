@@ -10,5 +10,5 @@ import java.util.List;
 @Repository
 public interface TradeRepository extends JpaRepository<Trade,Long> {
 
-    List<Trade> findAllByBuyer(Trader trader);
+    List<Trade> findAllByTrader(Trader trader);
 }

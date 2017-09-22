@@ -1,6 +1,6 @@
 package com.aspone.brokerwebapp.application.model.dto;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.aspone.brokerwebapp.domain.entity.enumtype.Side;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -8,15 +8,12 @@ import java.util.Date;
 public class TradeDto {
 
     private Long id;
-
     private Date date;
-
-    @JsonProperty("buyer")
-    private TraderDto buyer;
-
+    private String securityCode;
+    private String traderName;
     private BigDecimal price;
-
     private Long quantity;
+    private Side side;
 
     public Long getId() {
         return id;
@@ -34,12 +31,20 @@ public class TradeDto {
         this.date = date;
     }
 
-    public TraderDto getBuyer() {
-        return buyer;
+    public String getSecurityCode() {
+        return securityCode;
     }
 
-    public void setBuyer(TraderDto buyer) {
-        this.buyer = buyer;
+    public void setSecurityCode(String securityCode) {
+        this.securityCode = securityCode;
+    }
+
+    public String getTraderName() {
+        return traderName;
+    }
+
+    public void setTraderName(String traderName) {
+        this.traderName = traderName;
     }
 
     public BigDecimal getPrice() {
@@ -56,5 +61,13 @@ public class TradeDto {
 
     public void setQuantity(Long quantity) {
         this.quantity = quantity;
+    }
+
+    public Side getSide() {
+        return side;
+    }
+
+    public void setSide(Side side) {
+        this.side = side;
     }
 }

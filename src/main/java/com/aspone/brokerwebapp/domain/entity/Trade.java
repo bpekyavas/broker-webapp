@@ -1,5 +1,8 @@
 package com.aspone.brokerwebapp.domain.entity;
 
+import com.aspone.brokerwebapp.domain.entity.converter.SideConverter;
+import com.aspone.brokerwebapp.domain.entity.enumtype.Side;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Date;
@@ -16,14 +19,22 @@ public class Trade {
     private Date date;
 
     @ManyToOne
+    @JoinColumn(name="securityId", referencedColumnName = "id" , nullable = false)
+    private Security security;
+
+    @ManyToOne
     @JoinColumn(name="traderId", referencedColumnName = "id" , nullable = false)
-    private Trader buyer;
+    private Trader trader;
 
     @Column(name="price")
     private BigDecimal price;
 
     @Column(name="quantity")
     private Long quantity;
+
+    @Column(name="side")
+    @Convert(converter = SideConverter.class)
+    private Side side;
 
     public Long getId() {
         return id;
@@ -41,12 +52,12 @@ public class Trade {
         this.date = date;
     }
 
-    public Trader getBuyer() {
-        return buyer;
+    public Trader getTrader() {
+        return trader;
     }
 
-    public void setBuyer(Trader buyer) {
-        this.buyer = buyer;
+    public void setTrader(Trader trader) {
+        this.trader = trader;
     }
 
     public BigDecimal getPrice() {
@@ -63,5 +74,21 @@ public class Trade {
 
     public void setQuantity(Long quantity) {
         this.quantity = quantity;
+    }
+
+    public Security getSecurity() {
+        return security;
+    }
+
+    public void setSecurity(Security security) {
+        this.security = security;
+    }
+
+    public Side getSide() {
+        return side;
+    }
+
+    public void setSide(Side side) {
+        this.side = side;
     }
 }

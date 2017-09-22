@@ -7,5 +7,5 @@ import java.math.BigDecimal;
 public interface PriceController {
 
     PriceResponse retrievePrice(Long securityId);
-    void updatePrice(Long securityId, BigDecimal price);
+    void updateSpread(Long securityId, BigDecimal price);
 }

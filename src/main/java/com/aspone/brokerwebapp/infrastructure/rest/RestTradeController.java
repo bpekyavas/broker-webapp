@@ -1,18 +1,13 @@
 package com.aspone.brokerwebapp.infrastructure.rest;
 
 import com.aspone.brokerwebapp.application.controller.TradeController;
+import com.aspone.brokerwebapp.application.model.request.TradeRequest;
 import com.aspone.brokerwebapp.application.model.response.TradeListResponse;
 import com.aspone.brokerwebapp.domain.service.TradeService;
 import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.*;
 
-import java.math.BigDecimal;
-
-@Controller
+@RestController
 public class RestTradeController implements TradeController {
 
     private TradeService tradeService;
@@ -24,8 +19,8 @@ public class RestTradeController implements TradeController {
     @Override
     @PostMapping("/api/v1/trades")
     @ResponseStatus(HttpStatus.CREATED)
-    public void match(Long buyerId, BigDecimal price, Long quantity) {
-        tradeService.match(buyerId, price, quantity);
+    public void match(TradeRequest tradeRequest) {
+        tradeService.match(tradeRequest);
     }
 
     @Override
