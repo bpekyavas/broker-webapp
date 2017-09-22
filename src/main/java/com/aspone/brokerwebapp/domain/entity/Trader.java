@@ -1,4 +1,4 @@
-package com.aspone.brokerwebapp.model;
+package com.aspone.brokerwebapp.domain.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
