@@ -1,19 +1,8 @@
-package com.aspone.brokerwebapp.domain.entity;
+package com.aspone.brokerwebapp.application.model.dto;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+public class TraderDto {
 
-@Entity
-public class Trader {
-
-    @Id
-    @Column(name="id")
-    @GeneratedValue
     private Long id;
-
-    @Column(name="name")
     private String name;
 
     public Long getId() {
