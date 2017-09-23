@@ -7,7 +7,10 @@ import com.aspone.brokerwebapp.domain.entity.Security;
 import com.aspone.brokerwebapp.domain.entity.Trade;
 import com.aspone.brokerwebapp.domain.entity.Trader;
 import com.aspone.brokerwebapp.domain.entity.enumtype.Side;
-import com.aspone.brokerwebapp.domain.exception.*;
+import com.aspone.brokerwebapp.domain.exception.SecurityNotFoundBusinessException;
+import com.aspone.brokerwebapp.domain.exception.TradeSaveBusinessException;
+import com.aspone.brokerwebapp.domain.exception.TraderNotFoundBusinessException;
+import com.aspone.brokerwebapp.domain.exception.TradesNotFoundBusinessException;
 import com.aspone.brokerwebapp.domain.repository.SecurityRepository;
 import com.aspone.brokerwebapp.domain.repository.TradeRepository;
 import com.aspone.brokerwebapp.domain.repository.TraderRepository;
@@ -63,14 +66,18 @@ public class TradeService {
     public TradeListResponse retrieveTrades(Long traderId) {
         Trader trader = Optional.ofNullable(traderRepository.findOne(traderId))
                 .orElseThrow(() -> new TraderNotFoundBusinessException("Trader is not found!"));
-        List<Trade> tradeList = Optional.ofNullable(tradeRepository.findAllByTrader(trader))
-                .orElseThrow(() -> new TradeNotFoundBusinessException("Trade is not found!"));
+        List<Trade> tradeList = tradeRepository.findAllByTrader(trader);
+        if (tradeList.isEmpty()) {
+            throw new TradesNotFoundBusinessException("Trades not found!");
+        }
         return tradeListToResponseConverter.convert(tradeList);
     }
 
     public TradeListResponse retrieveAllTrades() {
-        List<Trade> tradeList = Optional.ofNullable(tradeRepository.findAll())
-                .orElseThrow(() -> new TradeNotFoundBusinessException("Trade is not found!"));
+        List<Trade> tradeList = tradeRepository.findAll();
+        if (tradeList.isEmpty()) {
+            throw new TradesNotFoundBusinessException("Trades not found!");
+        }
         return tradeListToResponseConverter.convert(tradeList);
     }
 }
