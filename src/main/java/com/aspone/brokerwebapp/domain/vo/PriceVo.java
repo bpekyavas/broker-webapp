@@ -4,10 +4,19 @@ import java.math.BigDecimal;
 
 public class PriceVo {
 
+    private Long id;
     private String symbol;
     private BigDecimal price;
     private BigDecimal bid;
     private BigDecimal offer;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public BigDecimal getPrice() {
         return price;

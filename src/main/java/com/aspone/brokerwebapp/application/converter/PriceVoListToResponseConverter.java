@@ -15,6 +15,7 @@ public class PriceVoListToResponseConverter {
         List<PriceDto> priceDtoList = priceVoList.stream().map(priceVo -> {
             PriceDto priceDto = new PriceDto();
             priceDto.setSymbol(priceVo.getSymbol());
+            priceDto.setId(priceVo.getId());
             priceDto.setOffer(priceVo.getOffer());
             priceDto.setBid(priceVo.getBid());
 
