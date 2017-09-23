@@ -18,7 +18,7 @@ public class TradeListToResponseConverter {
             tradeDto.setId(trade.getId());
             tradeDto.setPrice(trade.getPrice());
             tradeDto.setQuantity(trade.getQuantity());
-            tradeDto.setSecurityCode(trade.getSecurity().getCode());
+            tradeDto.setSymbol(trade.getSecurity().getSymbol());
             tradeDto.setTraderName(trade.getTrader().getName());
             tradeDto.setSide(trade.getSide());
             return tradeDto;

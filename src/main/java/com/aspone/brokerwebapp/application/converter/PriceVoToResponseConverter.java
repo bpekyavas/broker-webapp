@@ -9,10 +9,9 @@ public class PriceVoToResponseConverter {
 
     public PriceResponse convert(PriceVo priceVo) {
         PriceResponse priceResponse = new PriceResponse();
-        priceResponse.setSecurityCode(priceVo.getSecurityCode());
-        priceResponse.setPrice(priceVo.getPrice());
-        priceResponse.setBestAsk(priceVo.getBestAsk());
-        priceResponse.setBestBid(priceVo.getBestBid());
+        priceResponse.setSymbol(priceVo.getSymbol());
+        priceResponse.setOffer(priceVo.getOffer());
+        priceResponse.setBid(priceVo.getBid());
 
         return priceResponse;
     }

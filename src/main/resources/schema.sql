@@ -1,6 +1,6 @@
 CREATE TABLE security (
   id     BIGINT(20)     NOT NULL AUTO_INCREMENT,
-  code   VARCHAR(255)   NOT NULL,
+  symbol   VARCHAR(255)   NOT NULL,
   price  DECIMAL(15, 8) NOT NULL,
   spread DECIMAL(15, 8) NOT NULL,
   PRIMARY KEY (id)

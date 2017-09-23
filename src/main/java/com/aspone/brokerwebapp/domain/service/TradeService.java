@@ -48,7 +48,7 @@ public class TradeService {
     private Trade createTrade(TradeRequest tradeRequest) {
         Security security = Optional.ofNullable(securityRepository.findOne(tradeRequest.getSecurityId()))
                 .orElseThrow(() -> new SecurityNotFoundBusinessException("Security is not found!"));
-        BigDecimal tradePrice = Side.BUY.equals(tradeRequest.getSide()) ? security.getBestAsk() : security.getBestBid();
+        BigDecimal tradePrice = Side.BUY.equals(tradeRequest.getSide()) ? security.getOffer() : security.getBid();
         Trader trader = Optional.ofNullable(traderRepository.findOne(tradeRequest.getTraderId()))
                 .orElseThrow(() -> new TraderNotFoundBusinessException("Trader is not found!"));
 

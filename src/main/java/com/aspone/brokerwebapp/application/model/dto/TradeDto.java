@@ -9,7 +9,7 @@ public class TradeDto {
 
     private Long id;
     private Date date;
-    private String securityCode;
+    private String symbol;
     private String traderName;
     private BigDecimal price;
     private Long quantity;
@@ -31,12 +31,12 @@ public class TradeDto {
         this.date = date;
     }
 
-    public String getSecurityCode() {
-        return securityCode;
+    public String getSymbol() {
+        return symbol;
     }
 
-    public void setSecurityCode(String securityCode) {
-        this.securityCode = securityCode;
+    public void setSymbol(String symbol) {
+        this.symbol = symbol;
     }
 
     public String getTraderName() {

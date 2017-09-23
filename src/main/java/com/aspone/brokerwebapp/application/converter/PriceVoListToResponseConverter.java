@@ -14,10 +14,9 @@ public class PriceVoListToResponseConverter {
     public PriceListResponse convert(List<PriceVo> priceVoList) {
         List<PriceDto> priceDtoList = priceVoList.stream().map(priceVo -> {
             PriceDto priceDto = new PriceDto();
-            priceDto.setSecurityCode(priceVo.getSecurityCode());
-            priceDto.setBestAsk(priceVo.getBestAsk());
-            priceDto.setBestBid(priceVo.getBestBid());
-            priceDto.setPrice(priceVo.getPrice());
+            priceDto.setSymbol(priceVo.getSymbol());
+            priceDto.setOffer(priceVo.getOffer());
+            priceDto.setBid(priceVo.getBid());
 
             return priceDto;
         }).collect(Collectors.toList());

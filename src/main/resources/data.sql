@@ -1,4 +1,4 @@
-INSERT INTO security (id, code, price, spread)
+INSERT INTO security (id, symbol, price, spread)
 VALUES
 	(1, 'GARAN.E', 10.00000000, 0.40000000),
 	(2, 'AKBNK.E', 8.00000000, 0.30000000),

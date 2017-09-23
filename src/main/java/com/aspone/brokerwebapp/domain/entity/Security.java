@@ -12,8 +12,8 @@ public class Security {
     @GeneratedValue
     private Long id;
 
-    @Column(name="code")
-    private String code;
+    @Column(name="symbol")
+    private String symbol;
 
     @Column(name="price")
     private BigDecimal price;
@@ -29,12 +29,12 @@ public class Security {
         this.id = id;
     }
 
-    public String getCode() {
-        return code;
+    public String getSymbol() {
+        return symbol;
     }
 
-    public void setCode(String code) {
-        this.code = code;
+    public void setSymbol(String symbol) {
+        this.symbol = symbol;
     }
 
     public BigDecimal getPrice() {
@@ -53,11 +53,11 @@ public class Security {
         this.spread = spread;
     }
 
-    public BigDecimal getBestBid(){
+    public BigDecimal getBid(){
         return price.subtract(getSpread());
     }
 
-    public BigDecimal getBestAsk(){
+    public BigDecimal getOffer(){
         return price.add(getSpread());
     }
 }

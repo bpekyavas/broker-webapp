@@ -4,10 +4,10 @@ import java.math.BigDecimal;
 
 public class PriceVo {
 
-    private String securityCode;
+    private String symbol;
     private BigDecimal price;
-    private BigDecimal bestBid;
-    private BigDecimal bestAsk;
+    private BigDecimal bid;
+    private BigDecimal offer;
 
     public BigDecimal getPrice() {
         return price;
@@ -17,27 +17,27 @@ public class PriceVo {
         this.price = price;
     }
 
-    public BigDecimal getBestBid() {
-        return bestBid;
+    public BigDecimal getBid() {
+        return bid;
     }
 
-    public void setBestBid(BigDecimal bestBid) {
-        this.bestBid = bestBid;
+    public void setBid(BigDecimal bid) {
+        this.bid = bid;
     }
 
-    public BigDecimal getBestAsk() {
-        return bestAsk;
+    public BigDecimal getOffer() {
+        return offer;
     }
 
-    public void setBestAsk(BigDecimal bestAsk) {
-        this.bestAsk = bestAsk;
+    public void setOffer(BigDecimal offer) {
+        this.offer = offer;
     }
 
-    public String getSecurityCode() {
-        return securityCode;
+    public String getSymbol() {
+        return symbol;
     }
 
-    public void setSecurityCode(String securityCode) {
-        this.securityCode = securityCode;
+    public void setSymbol(String symbol) {
+        this.symbol = symbol;
     }
 }
