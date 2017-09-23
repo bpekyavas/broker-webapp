@@ -15,6 +15,9 @@ app.controller('PriceCtrl', ['$scope','PriceService', function ($scope,PriceServ
           });
     }
 
+    // Run function every second
+    setInterval($scope.getAllPrices, 1000);
+
 }]);
 
 app.service('PriceService',['$http', function ($http) {
