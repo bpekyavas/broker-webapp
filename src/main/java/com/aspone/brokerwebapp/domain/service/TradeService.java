@@ -34,24 +34,18 @@ public class TradeService {
     }
 
     public void match(TradeRequest tradeRequest) {
-        Security security = saveAndGetSecurity(tradeRequest);
-        saveTrade(tradeRequest, security);
+        Trade trade = createTrade(tradeRequest);
+        try {
+            tradeRepository.save(trade);
+        } catch (Exception e) {
+            throw new TradeSaveBusinessException("Trade could not be saved!");
+        }
     }
 
-    private Security saveAndGetSecurity(TradeRequest tradeRequest) {
+    private Trade createTrade(TradeRequest tradeRequest) {
         Security security = Optional.ofNullable(securityRepository.findOne(tradeRequest.getSecurityId()))
                 .orElseThrow(() -> new SecurityNotFoundBusinessException("Security is not found!"));
-        BigDecimal price = Side.BUY.equals(tradeRequest.getSide()) ? security.getBestAsk() : security.getBestBid();
-        security.setPrice(price);
-        try {
-            securityRepository.save(security);
-        } catch (Exception e) {
-            throw new SecurityUpdateBusinessException("Security price could not be updated");
-        }
-        return security;
-    }
-
-    private void saveTrade(TradeRequest tradeRequest, Security security) {
+        BigDecimal tradePrice = Side.BUY.equals(tradeRequest.getSide()) ? security.getBestAsk() : security.getBestBid();
         Trader trader = Optional.ofNullable(traderRepository.findOne(tradeRequest.getTraderId()))
                 .orElseThrow(() -> new TraderNotFoundBusinessException("Trader is not found!"));
 
@@ -59,15 +53,11 @@ public class TradeService {
         trade.setSecurity(security);
         trade.setTrader(trader);
         trade.setDate(new Date());
-        trade.setPrice(security.getPrice());
+        trade.setPrice(tradePrice);
         trade.setQuantity(tradeRequest.getQuantity());
         trade.setSide(tradeRequest.getSide());
 
-        try {
-            tradeRepository.save(trade);
-        } catch (Exception e) {
-            throw new TradeSaveBusinessException("Trade could not be saved!");
-        }
+        return trade;
     }
 
     public TradeListResponse retrieveTrades(Long traderId) {
