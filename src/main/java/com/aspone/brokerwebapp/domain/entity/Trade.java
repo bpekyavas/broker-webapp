@@ -19,11 +19,11 @@ public class Trade {
     private Date date;
 
     @ManyToOne
-    @JoinColumn(name="securityId", referencedColumnName = "id" , nullable = false)
+    @JoinColumn(name="security_id", referencedColumnName = "id" , nullable = false)
     private Security security;
 
     @ManyToOne
-    @JoinColumn(name="traderId", referencedColumnName = "id" , nullable = false)
+    @JoinColumn(name="trader_id", referencedColumnName = "id" , nullable = false)
     private Trader trader;
 
     @Column(name="price")

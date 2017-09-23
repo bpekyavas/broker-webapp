@@ -13,14 +13,12 @@ import com.aspone.brokerwebapp.domain.repository.TradeRepository;
 import com.aspone.brokerwebapp.domain.repository.TraderRepository;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
 @Service
-@Transactional
 public class TradeService {
 
     private TradeRepository tradeRepository;
@@ -36,30 +34,24 @@ public class TradeService {
     }
 
     public void match(TradeRequest tradeRequest) {
+        Security security = saveAndGetSecurity(tradeRequest);
+        saveTrade(tradeRequest, security);
+    }
+
+    private Security saveAndGetSecurity(TradeRequest tradeRequest) {
         Security security = Optional.ofNullable(securityRepository.findOne(tradeRequest.getSecurityId()))
                 .orElseThrow(() -> new SecurityNotFoundBusinessException("Security is not found!"));
         BigDecimal price = Side.BUY.equals(tradeRequest.getSide()) ? security.getBestAsk() : security.getBestBid();
-        saveTrade(tradeRequest, price);
         security.setPrice(price);
         try {
             securityRepository.save(security);
         } catch (Exception e) {
             throw new SecurityUpdateBusinessException("Security price could not be updated");
         }
+        return security;
     }
 
-    private void saveTrade(TradeRequest tradeRequest, BigDecimal price) {
-        Trade trade = createTrade(tradeRequest,price);
-        try {
-            tradeRepository.save(trade);
-        } catch (Exception e) {
-            throw new TradeSaveBusinessException("Trade could not be saved!");
-        }
-    }
-
-    private Trade createTrade(TradeRequest tradeRequest, BigDecimal price) {
-        Security security = Optional.ofNullable(securityRepository.findOne(tradeRequest.getSecurityId()))
-                .orElseThrow(() -> new SecurityNotFoundBusinessException("Security is not found!"));
+    private void saveTrade(TradeRequest tradeRequest, Security security) {
         Trader trader = Optional.ofNullable(traderRepository.findOne(tradeRequest.getTraderId()))
                 .orElseThrow(() -> new TraderNotFoundBusinessException("Trader is not found!"));
 
@@ -67,11 +59,15 @@ public class TradeService {
         trade.setSecurity(security);
         trade.setTrader(trader);
         trade.setDate(new Date());
-        trade.setPrice(price);
+        trade.setPrice(security.getPrice());
         trade.setQuantity(tradeRequest.getQuantity());
         trade.setSide(tradeRequest.getSide());
 
-        return trade;
+        try {
+            tradeRepository.save(trade);
+        } catch (Exception e) {
+            throw new TradeSaveBusinessException("Trade could not be saved!");
+        }
     }
 
     public TradeListResponse retrieveTrades(Long traderId) {

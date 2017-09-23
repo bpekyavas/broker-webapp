@@ -17,17 +17,17 @@ public class RestTradeController implements TradeController {
     }
 
     @Override
-    @PostMapping("/api/v1/trades")
-    @ResponseStatus(HttpStatus.CREATED)
-    public void match(TradeRequest tradeRequest) {
-        tradeService.match(tradeRequest);
-    }
-
-    @Override
     @GetMapping("/api/v1/trades")
     @ResponseStatus(HttpStatus.OK)
     public TradeListResponse retrieveTrades() {
         return tradeService.retrieveAllTrades();
+    }
+
+    @Override
+    @PostMapping("/api/v1/trades")
+    @ResponseStatus(HttpStatus.CREATED)
+    public void match(TradeRequest tradeRequest) {
+        tradeService.match(tradeRequest);
     }
 
     @Override

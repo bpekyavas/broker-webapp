@@ -11,6 +11,6 @@ VALUES
 	(9, 'TSPOR.E', 61.50000000, 8.00000000),
 	(10, 'BJKAS.E', 1903.00000000, 100.00000000);
 
-INSERT INTO `trader` (`id`, `name`)
+INSERT INTO trader (id, name)
 VALUES
 	(1, 'Safa Ertekin');
