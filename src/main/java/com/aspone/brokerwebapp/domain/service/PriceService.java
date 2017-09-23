@@ -9,7 +9,9 @@ import com.aspone.brokerwebapp.domain.vo.PriceVo;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class PriceService {
@@ -26,6 +28,15 @@ public class PriceService {
         Security security = Optional.ofNullable(securityRepository.findOne(securityId))
                 .orElseThrow(() -> new SecurityNotFoundBusinessException("Security is not found!"));
         return securityToPriceVoConverter.convert(security);
+    }
+
+    public List<PriceVo> retrievePriceList() {
+        List<Security> securityList = securityRepository.findAll();
+        if (securityList.isEmpty()) {
+            throw new SecurityNotFoundBusinessException("No securities found!");
+        }
+        return securityList.stream().map(security ->
+                securityToPriceVoConverter.convert(security)).collect(Collectors.toList());
     }
 
     public void updateSpread(Long securityId, BigDecimal spread) {

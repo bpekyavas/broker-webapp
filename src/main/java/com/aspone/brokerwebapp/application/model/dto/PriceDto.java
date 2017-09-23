@@ -1,13 +1,21 @@
-package com.aspone.brokerwebapp.application.model.response;
+package com.aspone.brokerwebapp.application.model.dto;
 
 import java.math.BigDecimal;
 
-public class PriceResponse {
+public class PriceDto {
 
     private String securityCode;
     private BigDecimal price;
     private BigDecimal bestBid;
     private BigDecimal bestAsk;
+
+    public String getSecurityCode() {
+        return securityCode;
+    }
+
+    public void setSecurityCode(String securityCode) {
+        this.securityCode = securityCode;
+    }
 
     public BigDecimal getPrice() {
         return price;
@@ -31,13 +39,5 @@ public class PriceResponse {
 
     public void setBestAsk(BigDecimal bestAsk) {
         this.bestAsk = bestAsk;
-    }
-
-    public String getSecurityCode() {
-        return securityCode;
-    }
-
-    public void setSecurityCode(String securityCode) {
-        this.securityCode = securityCode;
     }
 }

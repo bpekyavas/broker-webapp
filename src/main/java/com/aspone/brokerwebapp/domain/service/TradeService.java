@@ -68,7 +68,7 @@ public class TradeService {
                 .orElseThrow(() -> new TraderNotFoundBusinessException("Trader is not found!"));
         List<Trade> tradeList = tradeRepository.findAllByTrader(trader);
         if (tradeList.isEmpty()) {
-            throw new TradesNotFoundBusinessException("Trades not found!");
+            throw new TradesNotFoundBusinessException("No trades found!");
         }
         return tradeListToResponseConverter.convert(tradeList);
     }
@@ -76,7 +76,7 @@ public class TradeService {
     public TradeListResponse retrieveAllTrades() {
         List<Trade> tradeList = tradeRepository.findAll();
         if (tradeList.isEmpty()) {
-            throw new TradesNotFoundBusinessException("Trades not found!");
+            throw new TradesNotFoundBusinessException("No trades found!");
         }
         return tradeListToResponseConverter.convert(tradeList);
     }

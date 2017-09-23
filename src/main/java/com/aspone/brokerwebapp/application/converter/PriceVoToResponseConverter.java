@@ -7,9 +7,9 @@ import org.springframework.stereotype.Component;
 @Component
 public class PriceVoToResponseConverter {
 
-    public PriceResponse convert(PriceVo priceVo)
-    {
+    public PriceResponse convert(PriceVo priceVo) {
         PriceResponse priceResponse = new PriceResponse();
+        priceResponse.setSecurityCode(priceVo.getSecurityCode());
         priceResponse.setPrice(priceVo.getPrice());
         priceResponse.setBestAsk(priceVo.getBestAsk());
         priceResponse.setBestBid(priceVo.getBestBid());

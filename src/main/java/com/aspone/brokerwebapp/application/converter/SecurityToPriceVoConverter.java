@@ -12,6 +12,7 @@ public class SecurityToPriceVoConverter {
         priceVo.setPrice(security.getPrice());
         priceVo.setBestAsk(security.getBestAsk());
         priceVo.setBestBid(security.getBestBid());
+        priceVo.setSecurityCode(security.getCode());
 
         return priceVo;
     }

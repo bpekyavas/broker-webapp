@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 
 public class PriceVo {
 
+    private String securityCode;
     private BigDecimal price;
     private BigDecimal bestBid;
     private BigDecimal bestAsk;
@@ -30,5 +31,13 @@ public class PriceVo {
 
     public void setBestAsk(BigDecimal bestAsk) {
         this.bestAsk = bestAsk;
+    }
+
+    public String getSecurityCode() {
+        return securityCode;
+    }
+
+    public void setSecurityCode(String securityCode) {
+        this.securityCode = securityCode;
     }
 }
