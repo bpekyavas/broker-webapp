@@ -1,6 +1,17 @@
 var app = angular.module('app', []);
 
-app.controller('PriceCtrl', ['$scope', 'PriceService', function ($scope, PriceService) {
+app.controller('PriceCtrl', ['$scope', '$interval', 'PriceService', function ($scope, $interval, PriceService) {
+
+    var interval;
+
+    $scope.realTimeStateChanged = function (checked) {
+        if (checked) {
+            interval = $interval($scope.getAllPrices, 1000);
+        }
+        else {
+            $interval.cancel(interval);
+        }
+    };
 
     $scope.getAllPrices = function () {
         PriceService.getAllPrices()
@@ -52,10 +63,6 @@ app.controller('PriceCtrl', ['$scope', 'PriceService', function ($scope, PriceSe
                     $scope.message = '';
                 });
     };
-
-    // // Run function every second
-    // setInterval($scope.getAllPrices, 10000);
-
 }]);
 
 app.service('PriceService', ['$http', function ($http) {

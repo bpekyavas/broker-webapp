@@ -1,37 +1,22 @@
 <!DOCTYPE html>
 <html ng-app="app">
-<style>
-    table, th, td {
-        border: 1px solid grey;
-        border-collapse: collapse;
-        padding: 5px;
-    }
-
-    table tr:nth-child(odd) {
-        background-color: #f1f1f1;
-    }
-
-    table tr:nth-child(even) {
-        background-color: #ffffff;
-    }
-</style>
 <head>
     <meta charset="ISO-8859-1">
     <title>Market Overview</title>
     <script
             src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
     <script src="view/app.js"></script>
-    <style>
-        a {
-            cursor: pointer;
-            background-color: lightblue;
-        }
-    </style>
+    <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
 <h1>Market Overview</h1>
 <br>
 <div ng-controller="PriceCtrl as ctrl" data-ng-init="getAllPrices()">
+    <label>Realtime: </label>
+    <label class="switch">
+        <input ng-click='realTimeStateChanged(isRealTime)' ng-model="isRealTime" type="checkbox">
+        <span class="slider round"></span>
+    </label>
     <table ng-show="prices.length">
         <thead>
         <tr>
