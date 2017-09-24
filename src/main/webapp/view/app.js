@@ -44,11 +44,11 @@ app.controller('PriceCtrl', ['$scope', 'PriceService', function ($scope, PriceSe
     $scope.updateSpread = function (priceRow, spread) {
         PriceService.updateSpread(priceRow.id, spread)
             .then(function success(response) {
-                    $scope.message = 'Trade successful!';
+                    $scope.message = 'Spread updated!';
                     $scope.errorMessage = '';
                 },
                 function error(response) {
-                    $scope.errorMessage = 'Error in matching!';
+                    $scope.errorMessage = 'Error in spread update!';
                     $scope.message = '';
                 });
     };
