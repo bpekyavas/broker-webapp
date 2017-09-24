@@ -16,6 +16,8 @@ public class PriceVoListToResponseConverter {
             PriceDto priceDto = new PriceDto();
             priceDto.setSymbol(priceVo.getSymbol());
             priceDto.setId(priceVo.getId());
+            priceDto.setPrice(priceVo.getPrice());
+            priceDto.setSpread(priceVo.getSpread());
             priceDto.setOffer(priceVo.getOffer());
             priceDto.setBid(priceVo.getBid());
 

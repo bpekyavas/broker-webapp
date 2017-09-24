@@ -27,6 +27,7 @@ public class PriceVoListToResponseConverterTest {
         firstPriceVo.setId(1L);
         firstPriceVo.setSymbol("GARAN.E");
         firstPriceVo.setPrice(BigDecimal.TEN);
+        firstPriceVo.setSpread(BigDecimal.ONE);
         firstPriceVo.setBid(new BigDecimal("9"));
         firstPriceVo.setOffer(new BigDecimal("11"));
 
@@ -34,6 +35,7 @@ public class PriceVoListToResponseConverterTest {
         secondPriceVo.setId(2L);
         secondPriceVo.setSymbol("AKBNK.E");
         secondPriceVo.setPrice(new BigDecimal("20"));
+        secondPriceVo.setSpread(new BigDecimal("2"));
         secondPriceVo.setBid(new BigDecimal("18"));
         secondPriceVo.setOffer(new BigDecimal("22"));
 
@@ -52,12 +54,14 @@ public class PriceVoListToResponseConverterTest {
         PriceDto firstPriceDto = priceDtoList.get(0);
         assertThat(firstPriceDto.getId()).isEqualTo(1L);
         assertThat(firstPriceDto.getBid()).isEqualTo(new BigDecimal("9"));
+        assertThat(firstPriceDto.getSpread()).isEqualTo(new BigDecimal("1"));
         assertThat(firstPriceDto.getOffer()).isEqualTo(new BigDecimal("11"));
         assertThat(firstPriceDto.getSymbol()).isEqualTo("GARAN.E");
 
         PriceDto secondPriceDto = priceDtoList.get(1);
         assertThat(secondPriceDto.getId()).isEqualTo(2L);
         assertThat(secondPriceDto.getBid()).isEqualTo(new BigDecimal("18"));
+        assertThat(secondPriceDto.getSpread()).isEqualTo(new BigDecimal("2"));
         assertThat(secondPriceDto.getOffer()).isEqualTo(new BigDecimal("22"));
         assertThat(secondPriceDto.getSymbol()).isEqualTo("AKBNK.E");
     }

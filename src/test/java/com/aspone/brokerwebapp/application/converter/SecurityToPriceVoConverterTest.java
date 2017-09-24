@@ -34,6 +34,7 @@ public class SecurityToPriceVoConverterTest {
         assertThat(priceVo.getId()).isEqualTo(1L);
         assertThat(priceVo.getSymbol()).isEqualTo("GARAN.E");
         assertThat(priceVo.getPrice()).isEqualTo(BigDecimal.ONE);
+        assertThat(priceVo.getSpread()).isEqualTo(new BigDecimal("0.5"));
         assertThat(priceVo.getBid()).isEqualTo(new BigDecimal("0.5"));
         assertThat(priceVo.getOffer()).isEqualTo(new BigDecimal("1.5"));
     }

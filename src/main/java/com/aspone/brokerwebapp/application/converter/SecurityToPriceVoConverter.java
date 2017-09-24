@@ -11,6 +11,7 @@ public class SecurityToPriceVoConverter {
         PriceVo priceVo = new PriceVo();
         priceVo.setId(security.getId());
         priceVo.setPrice(security.getPrice());
+        priceVo.setSpread(security.getSpread());
         priceVo.setOffer(security.getOffer());
         priceVo.setBid(security.getBid());
         priceVo.setSymbol(security.getSymbol());

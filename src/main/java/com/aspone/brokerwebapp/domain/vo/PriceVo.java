@@ -7,6 +7,7 @@ public class PriceVo {
     private Long id;
     private String symbol;
     private BigDecimal price;
+    private BigDecimal spread;
     private BigDecimal bid;
     private BigDecimal offer;
 
@@ -48,5 +49,13 @@ public class PriceVo {
 
     public void setSymbol(String symbol) {
         this.symbol = symbol;
+    }
+
+    public BigDecimal getSpread() {
+        return spread;
+    }
+
+    public void setSpread(BigDecimal spread) {
+        this.spread = spread;
     }
 }

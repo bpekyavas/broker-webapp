@@ -3,6 +3,7 @@ package com.aspone.brokerwebapp.infrastructure.rest;
 import com.aspone.brokerwebapp.application.controller.PriceController;
 import com.aspone.brokerwebapp.application.converter.PriceVoListToResponseConverter;
 import com.aspone.brokerwebapp.application.converter.PriceVoToResponseConverter;
+import com.aspone.brokerwebapp.application.model.request.UpdateSpreadRequest;
 import com.aspone.brokerwebapp.application.model.response.PriceListResponse;
 import com.aspone.brokerwebapp.application.model.response.PriceResponse;
 import com.aspone.brokerwebapp.domain.service.PriceService;
@@ -10,7 +11,6 @@ import com.aspone.brokerwebapp.domain.vo.PriceVo;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 @RestController
@@ -45,7 +45,7 @@ public class RestPriceController implements PriceController {
     @Override
     @PostMapping("/api/v1/prices/{securityId}")
     @ResponseStatus(HttpStatus.CREATED)
-    public void updateSpread(@PathVariable Long securityId, @RequestBody BigDecimal spread) {
-        priceService.updateSpread(securityId, spread);
+    public void updateSpread(@PathVariable Long securityId,@RequestBody UpdateSpreadRequest updateSpreadRequest) {
+        priceService.updateSpread(securityId, updateSpreadRequest.getSpread());
     }
 }

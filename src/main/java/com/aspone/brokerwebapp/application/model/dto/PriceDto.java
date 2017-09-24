@@ -6,6 +6,8 @@ public class PriceDto {
 
     private Long id;
     private String symbol;
+    private BigDecimal price;
+    private BigDecimal spread;
     private BigDecimal bid;
     private BigDecimal offer;
 
@@ -39,5 +41,21 @@ public class PriceDto {
 
     public void setOffer(BigDecimal offer) {
         this.offer = offer;
+    }
+
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public void setPrice(BigDecimal price) {
+        this.price = price;
+    }
+
+    public BigDecimal getSpread() {
+        return spread;
+    }
+
+    public void setSpread(BigDecimal spread) {
+        this.spread = spread;
     }
 }

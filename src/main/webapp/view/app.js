@@ -15,8 +15,8 @@ app.controller('PriceCtrl', ['$scope', 'PriceService', function ($scope, PriceSe
                 });
     };
 
-    $scope.buy = function (priceRow,quantity) {
-        PriceService.buy(priceRow.id,quantity)
+    $scope.buy = function (priceRow, quantity) {
+        PriceService.buy(priceRow.id, quantity)
             .then(function success(response) {
                     $scope.message = 'Trade successful!';
                     $scope.errorMessage = '';
@@ -28,8 +28,8 @@ app.controller('PriceCtrl', ['$scope', 'PriceService', function ($scope, PriceSe
 
     };
 
-    $scope.sell = function (priceRow,quantity) {
-        PriceService.sell(priceRow.id,quantity)
+    $scope.sell = function (priceRow, quantity) {
+        PriceService.sell(priceRow.id, quantity)
             .then(function success(response) {
                     $scope.message = 'Trade successful!';
                     $scope.errorMessage = '';
@@ -39,6 +39,18 @@ app.controller('PriceCtrl', ['$scope', 'PriceService', function ($scope, PriceSe
                     $scope.message = '';
                 });
 
+    };
+
+    $scope.updateSpread = function (priceRow, spread) {
+        PriceService.updateSpread(priceRow.id, spread)
+            .then(function success(response) {
+                    $scope.message = 'Trade successful!';
+                    $scope.errorMessage = '';
+                },
+                function error(response) {
+                    $scope.errorMessage = 'Error in matching!';
+                    $scope.message = '';
+                });
     };
 
     // // Run function every second
@@ -80,6 +92,17 @@ app.service('PriceService', ['$http', function ($http) {
             method: 'POST',
             url: 'api/v1/trades',
             data: tradeData
+        });
+    }
+
+    this.updateSpread = function updateSpread(id, spread) {
+        var spreadData = {
+            spread: spread,
+        };
+        return $http({
+            method: 'POST',
+            url: 'api/v1/prices/' + id,
+            data: spreadData
         });
     }
 }]);
