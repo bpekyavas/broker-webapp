@@ -29,16 +29,17 @@
     </style>
 </head>
 <body>
-<div ng-controller="PriceCtrl">
+<div ng-controller="PriceCtrl as ctrl">
     <a ng-click="getAllPrices()">Get All Prices</a><br/>
     <table ng-show="prices.length">
         <thead>
-            <tr>
-                <th></th>
-                <th>symbol</th>
-                <th>bid</th>
-                <th>offer</th>
-            </tr>
+        <tr>
+            <th></th>
+            <th>symbol</th>
+            <th>bid</th>
+            <th>offer</th>
+            <th>quantity</th>
+        </tr>
         </thead>
         <tbody ng-repeat="prc in prices | orderBy : 'symbol'">
         <tr>
@@ -46,6 +47,15 @@
             <td>{{prc.symbol}}</td>
             <td>{{prc.bid}}</td>
             <td>{{prc.offer}}</td>
+            <td>
+                <input type="number" id="quantity" size="4" min="1" max="9999" ng-model="quantity"/>
+            </td>
+            <td>
+                <button ng-click="buy(prc,quantity)">Take</button>
+            </td>
+            <td>
+                <button ng-click="sell(prc,quantity)">Hit</button>
+            </td>
         </tr>
         </tbody>
     </table>
