@@ -45,7 +45,7 @@ public class RestPriceController implements PriceController {
     @Override
     @PostMapping("/api/v1/prices/{securityId}")
     @ResponseStatus(HttpStatus.CREATED)
-    public void updateSpread(@PathVariable Long securityId, BigDecimal spread) {
+    public void updateSpread(@PathVariable Long securityId, @RequestBody BigDecimal spread) {
         priceService.updateSpread(securityId, spread);
     }
 }

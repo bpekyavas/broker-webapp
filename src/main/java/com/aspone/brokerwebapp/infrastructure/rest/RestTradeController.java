@@ -26,7 +26,7 @@ public class RestTradeController implements TradeController {
     @Override
     @PostMapping("/api/v1/trades")
     @ResponseStatus(HttpStatus.CREATED)
-    public void match(TradeRequest tradeRequest) {
+    public void match(@RequestBody TradeRequest tradeRequest) {
         tradeService.match(tradeRequest);
     }
 
