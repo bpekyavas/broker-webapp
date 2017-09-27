@@ -11,6 +11,30 @@ VALUES
 	(9, 'TSPOR.E', round((rand()*100), 2), round(rand(),2)),
 	(10, 'BJKAS.E', round((rand()*100), 2), round(rand(),2));
 
-INSERT INTO trader (id, name)
+	INSERT INTO application_role (id, name)
 VALUES
-	(1, 'Safa Ertekin');
+	(1, 'USER'),
+	(2, 'ADMIN');
+
+INSERT INTO application_user (id, user_name,password,application_role_id)
+VALUES
+	(1, 'trader1','traderpass',1),
+	(2, 'trader2','traderpass',1),
+	(3, 'broker1','brokerpass',2),
+	(4, 'broker2','brokerpass',2);
+
+		INSERT INTO application_user_role (id, application_user_id, application_role_id)
+VALUES
+	(1, 1, 1),
+	(2, 2, 1),
+	(3, 3, 2);
+
+INSERT INTO trader (id, name,application_user_id)
+VALUES
+	(1, 'Safa Ertekin',1),
+	(2, 'Merve Ertekin',2);
+
+INSERT INTO broker (id, name,application_user_id)
+VALUES
+	(1, 'Hikmet Ertekin',3),
+	(2, 'Hulya Ertekin',4);

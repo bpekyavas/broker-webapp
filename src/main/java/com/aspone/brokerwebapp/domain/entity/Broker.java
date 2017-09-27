@@ -3,8 +3,8 @@ package com.aspone.brokerwebapp.domain.entity;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "trader")
-public class Trader {
+@Table(name = "broker")
+public class Broker {
 
     @Id
     @Column(name = "id")

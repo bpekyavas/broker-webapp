@@ -27,8 +27,8 @@ login
                     if (data.name) {
                         self.authenticated = true;
                         self.user = data.name
-                        self.broker = data && data.roles && data.roles.indexOf("ROLE_ADMIN") > -1;
-                        self.trader = data && data.roles && data.roles.indexOf("ROLE_USER") > -1;
+                        self.broker = data && data.roles && data.roles.indexOf("ADMIN") > -1;
+                        self.trader = data && data.roles && data.roles.indexOf("USER") > -1;
                     } else {
                         self.authenticated = false;
                         self.broker = false;

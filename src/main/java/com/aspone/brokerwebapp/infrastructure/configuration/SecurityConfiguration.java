@@ -1,5 +1,6 @@
 package com.aspone.brokerwebapp.infrastructure.configuration;
 
+import com.aspone.brokerwebapp.domain.service.ApplicationUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -8,28 +9,31 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 
 @Configuration
-	public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
+public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
-		@Autowired
-		public void globalUserDetails(AuthenticationManagerBuilder auth) throws Exception {
-			// @formatter:off
-			auth.inMemoryAuthentication()
-					.withUser("broker").password("brokerpass").roles("ADMIN")
-					.and()
-					.withUser("trader").password("traderpass").roles("USER");
-			// @formatter:on
-		}
+    private ApplicationUserDetailsService applicationUserDetailsService;
 
-		@Override
-		protected void configure(HttpSecurity http) throws Exception {
-			http
-					.httpBasic().and()
-					.logout().and()
-					.authorizeRequests()
-					.antMatchers("/index.html", "/").permitAll()
-					.anyRequest().authenticated()
-					.and()
-					.csrf()
-					.csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse());
-		}
-	}
+    public SecurityConfiguration(ApplicationUserDetailsService applicationUserDetailsService) {
+        this.applicationUserDetailsService = applicationUserDetailsService;
+    }
+
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        http
+                .httpBasic().and()
+                .logout().and()
+                .authorizeRequests()
+                .antMatchers("/index.html", "/").permitAll()
+                .anyRequest().authenticated()
+                .and()
+                .csrf()
+                .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse());
+    }
+
+    @Override
+    @Autowired
+    protected void configure(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception {
+        authenticationManagerBuilder.userDetailsService(applicationUserDetailsService);
+    }
+
+}
