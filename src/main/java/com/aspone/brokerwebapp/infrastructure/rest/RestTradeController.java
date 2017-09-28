@@ -5,6 +5,7 @@ import com.aspone.brokerwebapp.application.model.request.TradeRequest;
 import com.aspone.brokerwebapp.application.model.response.TradeListResponse;
 import com.aspone.brokerwebapp.domain.service.TradeService;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -18,6 +19,7 @@ public class RestTradeController implements TradeController {
 
     @Override
     @GetMapping("/api/v1/trades")
+    @PreAuthorize("hasRole('ADMIN')")
     @ResponseStatus(HttpStatus.OK)
     public TradeListResponse retrieveTrades() {
         return tradeService.retrieveAllTrades();

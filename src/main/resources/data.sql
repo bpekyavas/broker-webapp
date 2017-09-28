@@ -13,8 +13,8 @@ VALUES
 
 	INSERT INTO application_role (id, name)
 VALUES
-	(1, 'USER'),
-	(2, 'ADMIN');
+	(1, 'ROLE_USER'),
+	(2, 'ROLE_ADMIN');
 
 INSERT INTO application_user (id, user_name,password,application_role_id)
 VALUES
@@ -27,7 +27,8 @@ VALUES
 VALUES
 	(1, 1, 1),
 	(2, 2, 1),
-	(3, 3, 2);
+	(3, 3, 2),
+	(4, 4, 2);
 
 INSERT INTO trader (id, name,application_user_id)
 VALUES
