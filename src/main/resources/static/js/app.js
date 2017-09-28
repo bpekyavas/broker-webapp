@@ -1,71 +1,156 @@
-var app = angular.module('app', []);
+var app = angular.module('app', ['ngRoute']);
 
-app.controller('PriceCtrl', ['$scope', '$interval', 'PriceService', function ($scope, $interval, PriceService) {
+app
+    .config(function ($httpProvider, $routeProvider) {
 
-    var interval;
+        $httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
-    $scope.realTimeStateChanged = function (checked) {
-        if (checked) {
-            interval = $interval($scope.getAllPrices, 1000);
-        }
-        else {
-            $interval.cancel(interval);
-        }
-    };
+        $routeProvider
+            .when('/brokers-market', {
+                templateUrl: 'pages/brokers-market.html',
+                controller: 'PriceController'
+            })
+            .when('/traders-market', {
+                templateUrl: 'pages/traders-market.html',
+                controller: 'PriceController'
+            })
 
-    $scope.getAllPrices = function () {
-        PriceService.getAllPrices()
-            .then(function success(response) {
-                    $scope.prices = response.data.prices;
-                    $scope.message = '';
-                    $scope.errorMessage = '';
-                },
-                function error(response) {
-                    $scope.message = '';
-                    $scope.errorMessage = 'Error getting prices!';
+    })
+    .service('SharedProperties', function () {
+        var traderId;
+
+        return {
+            getTraderId: function () {
+                return property;
+            },
+            setTraderId: function (value) {
+                property = value;
+            }
+        };
+    })
+    .controller('LoginController',
+
+        function ($http, SharedProperties) {
+
+            var self = this;
+
+            var authenticate = function (credentials, callback) {
+
+                var headers = credentials ? {
+                    authorization: "Basic "
+                    + btoa(credentials.username + ":"
+                        + credentials.password)
+                } : {};
+
+                self.user = '';
+                $http.get('user', {
+                    headers: headers
+                }).then(function (response) {
+                    var data = response.data;
+                    if (data.name) {
+                        self.authenticated = true;
+                        self.user = data.name;
+                        self.broker = data && data.roles && data.roles.indexOf("ADMIN") > -1;
+                        self.trader = data && data.roles && data.roles.indexOf("USER") > -1;
+                        SharedProperties.setTraderId(data.traderId)
+                    } else {
+                        self.authenticated = false;
+                        self.broker = false;
+                        self.trader = false;
+                    }
+                    callback && callback(true);
+                }, function () {
+                    self.authenticated = false;
+                    callback && callback(false);
                 });
-    };
 
-    $scope.buy = function (priceRow, quantity) {
-        PriceService.buy(priceRow.id, quantity)
-            .then(function success(response) {
-                    $scope.message = 'Trade successful!';
-                    $scope.errorMessage = '';
-                },
-                function error(response) {
-                    $scope.errorMessage = 'Error in matching!';
-                    $scope.message = '';
+            };
+
+            authenticate();
+
+            self.credentials = {};
+            self.login = function () {
+                authenticate(self.credentials, function (authenticated) {
+                    self.authenticated = authenticated;
+                    self.error = !authenticated;
+                })
+            };
+
+            self.logout = function () {
+                $http.post('logout', {}).finally(function () {
+                    self.authenticated = false;
+                    self.broker = false;
+                    self.trader = false;
                 });
+            }
 
-    };
+        })
+    .controller('PriceController', function ($scope, $interval, PriceService, SharedProperties) {
 
-    $scope.sell = function (priceRow, quantity) {
-        PriceService.sell(priceRow.id, quantity)
-            .then(function success(response) {
-                    $scope.message = 'Trade successful!';
-                    $scope.errorMessage = '';
-                },
-                function error(response) {
-                    $scope.errorMessage = 'Error in matching!';
-                    $scope.message = '';
-                });
+        var interval;
 
-    };
+        $scope.realTimeStateChanged = function (checked) {
+            if (checked) {
+                interval = $interval($scope.getAllPrices, 1000);
+            }
+            else {
+                $interval.cancel(interval);
+            }
+        };
 
-    $scope.updateSpread = function (priceRow, spread) {
-        PriceService.updateSpread(priceRow.id, spread)
-            .then(function success(response) {
-                    $scope.message = 'Spread updated!';
-                    $scope.errorMessage = '';
-                },
-                function error(response) {
-                    $scope.errorMessage = 'Error in spread update!';
-                    $scope.message = '';
-                });
-    };
-}]);
+        $scope.getAllPrices = function () {
+            PriceService.getAllPrices()
+                .then(function success(response) {
+                        $scope.prices = response.data.prices;
+                        $scope.message = '';
+                        $scope.errorMessage = '';
+                    },
+                    function error(response) {
+                        $scope.message = '';
+                        $scope.errorMessage = 'Error getting prices!';
+                    });
+        };
 
-app.service('PriceService', ['$http', function ($http) {
+        $scope.buy = function (priceRow, quantity) {
+            PriceService.buy(priceRow.id, quantity, SharedProperties.getTraderId())
+                .then(function success(response) {
+                        $scope.message = 'Trade successful!';
+                        $scope.errorMessage = '';
+                    },
+                    function error(response) {
+                        $scope.errorMessage = 'Error in matching!';
+                        $scope.message = '';
+                    });
+
+        };
+
+        $scope.sell = function (priceRow, quantity) {
+            PriceService.sell(priceRow.id, quantity, SharedProperties.getTraderId())
+                .then(function success(response) {
+                        $scope.message = 'Trade successful!';
+                        $scope.errorMessage = '';
+                    },
+                    function error(response) {
+                        $scope.errorMessage = 'Error in matching!';
+                        $scope.message = '';
+                    });
+
+        };
+
+        $scope.updateSpread = function (priceRow, spread) {
+            PriceService.updateSpread(priceRow.id, spread)
+                .then(function success(response) {
+                        $scope.message = 'Spread updated!';
+                        $scope.errorMessage = '';
+                    },
+                    function error(response) {
+                        $scope.errorMessage = 'Error in spread update!';
+                        $scope.message = '';
+                    });
+        };
+    });
+
+app.service('PriceService', function ($http) {
 
     this.getAllPrices = function getAllPrices() {
         return $http({
@@ -74,10 +159,10 @@ app.service('PriceService', ['$http', function ($http) {
         });
     };
 
-    this.buy = function buy(id, quantity) {
+    this.buy = function buy(id, quantity, traderId) {
         var tradeData = {
             securityId: id,
-            traderId: 1,
+            traderId: traderId,
             quantity: quantity,
             side: "BUY"
         };
@@ -88,10 +173,10 @@ app.service('PriceService', ['$http', function ($http) {
         });
     };
 
-    this.sell = function sell(id, quantity) {
+    this.sell = function sell(id, quantity, traderId) {
         var tradeData = {
             securityId: id,
-            traderId: 1,
+            traderId: traderId,
             quantity: quantity,
             side: "SELL"
         };
@@ -100,11 +185,11 @@ app.service('PriceService', ['$http', function ($http) {
             url: 'api/v1/trades',
             data: tradeData
         });
-    }
+    };
 
     this.updateSpread = function updateSpread(id, spread) {
         var spreadData = {
-            spread: spread,
+            spread: spread
         };
         return $http({
             method: 'POST',
@@ -112,4 +197,4 @@ app.service('PriceService', ['$http', function ($http) {
             data: spreadData
         });
     }
-}]);
+});

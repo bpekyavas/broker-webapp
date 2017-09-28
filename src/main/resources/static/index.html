@@ -1,19 +1,18 @@
 <!DOCTYPE html>
-<html ng-app="login">
+<html ng-app="app">
 <head>
     <meta charset="ISO-8859-1">
     <title>Home</title>
-    <script
-            src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
-    <script src="js/login.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular-route.js"></script>
+    <script src="js/app.js"></script>
     <link rel="stylesheet" href="css/styles.css">
 </head>
-<body ng-controller="navigation as nav" ng-cloak
+<body ng-controller="LoginController as nav" ng-cloak
       class="ng-cloak">
-<h1>Home</h1>
-<br>
 <div class="container">
     <a class="brand" href='#/'>Home</a>
+    <div ng-view ng-show="nav.authenticated"></div>
     <div class="navbar-right">
         <a
                 class="btn btn-primary" ng-show="nav.authenticated" href=""
@@ -23,8 +22,6 @@
         </p>
     </div>
 </div>
-</div>
-</nav>
 <div class="alert alert-danger" ng-show="nav.error">There was a
     problem logging in. Please try again.
 </div>
@@ -44,11 +41,84 @@
     </form>
 </div>
 <div class="container" ng-show="nav.authenticated && nav.broker">
-    <a class="btn btn-primary" href="/brokers-market.html">Go To Brokers Page</a>
+    <a class="btn btn-primary" href="#/brokers-market">Go To Brokers Page</a>
 </div>
 <br/>
 <div class="container" ng-show="nav.authenticated && nav.trader">
-    <a class="btn btn-primary" href="/traders-market.html">Go To Traders Page</a>
+    <a class="btn btn-primary" href="#/traders-market">Go To Traders Page</a>
 </div>
+<script type="text/ng-template" id="pages/brokers-market.html">
+    <h1>Market Overview for Brokers</h1>
+    <br>
+    <div ng-controller="PriceController as ctrl" data-ng-init="getAllPrices()">
+        <table ng-show="prices.length">
+            <thead>
+            <tr>
+                <th></th>
+                <th>symbol</th>
+                <th>price</th>
+                <th>spread</th>
+            </tr>
+            </thead>
+            <tbody ng-repeat="prc in prices | orderBy : 'symbol'">
+            <tr>
+                <td>{{ $index + 1 }}</td>
+                <td>{{prc.symbol}}</td>
+                <td>{{prc.price}}</td>
+                <td>
+                    <input type="number" step="0.01" id="spread" size="4" min="0" max="9999" ng-model="spread"
+                           value={{prc.spread}}/>
+                </td>
+                <td>
+                    <button ng-click="updateSpread(prc,spread)">Update</button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <p style="color: green">{{message}}</p>
+        <p style="color: red">{{errorMessage}}</p>
+    </div>
+</script>
+<script type="text/ng-template" id="pages/traders-market.html">
+    <h1>Market Overview</h1>
+    <br>
+    <div ng-controller="PriceController as ctrl" data-ng-init="getAllPrices()">
+        <label>Realtime: </label>
+        <label class="switch">
+            <input ng-click='realTimeStateChanged(isRealTime)' ng-model="isRealTime" type="checkbox">
+            <span class="slider round"></span>
+        </label>
+        <table ng-show="prices.length">
+            <thead>
+            <tr>
+                <th></th>
+                <th>symbol</th>
+                <th>bid</th>
+                <th>offer</th>
+                <th>quantity</th>
+            </tr>
+            </thead>
+            <tbody ng-repeat="prc in prices | orderBy : 'symbol'">
+            <tr>
+                <td>{{ $index + 1 }}</td>
+                <td>{{prc.symbol}}</td>
+                <td>{{prc.bid}}</td>
+                <td>{{prc.offer}}</td>
+                <td>
+                    <input type="number" id="quantity" size="4" min="1" max="9999" ng-model="quantity"/>
+                </td>
+                <td>
+                    <button ng-click="buy(prc,quantity)">Take</button>
+                </td>
+                <td>
+                    <button ng-click="sell(prc,quantity)">Hit</button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <p style="color: green">{{message}}</p>
+        <p style="color: red">{{errorMessage}}</p>
+    </div>
+</script>
 </body>
 </html>
