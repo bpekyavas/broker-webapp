@@ -25,12 +25,57 @@ form {
 }
 
 .brand {
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    -o-appearance: none;
+    -ms-appearance: none;
+    appearance: none;
+    -moz-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+    -webkit-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+    -o-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+    -ms-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+    transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+    border-radius: 10px;
+    border: 0;
+    cursor: pointer;
+    display: inline-block;
+    height: 1.2em;
+    padding: 0 2em;
+    text-align: center;
+    white-space: nowrap;
     color: seashell;
     background-color: #3cadd4;
     font-weight: 700;
     font-size: x-large;
-    line-height: 1em;
+    line-height: 1.1em;
     margin: 0 0 1em 0;
+    text-decoration: none;
+}
+
+.btn-primary{
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    -o-appearance: none;
+    -ms-appearance: none;
+    appearance: none;
+    -moz-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+    -webkit-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+    -o-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+    -ms-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+    transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+    border-radius: 10px;
+    border: 0;
+    cursor: pointer;
+    display: inline-block;
+    height: 1.2em;
+    padding: 0 2em;
+    text-align: center;
+    white-space: nowrap;
+    cursor: pointer;
+    background-color: white;
+    font-size: medium;
+    line-height: 1.1em;
+    color: #3cadd4;
     text-decoration: none;
 }
 
@@ -174,10 +219,8 @@ button {
 }
 
 .btn-login {
-    height: 4.85em;
-    line-height: 4.95em;
-    width: 12em;
     border-radius: 30px;
+    font-size: large;
 }
 
 button:hover {

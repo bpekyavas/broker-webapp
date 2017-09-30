@@ -11,16 +11,17 @@
 <body ng-controller="LoginController as nav" ng-cloak
       class="ng-cloak">
 <div class="container">
-    <a class="brand" href='#/'>Home</a>
-    <br>
+    <img src="css/logo.png"><br>
+    <a class="brand" href='#/' ng-show="nav.authenticated">Home</a>
     <div class="container" ng-show="nav.authenticated && nav.broker">
         <a class="btn btn-primary" href="#/brokers-market">Market Overview for Brokers</a>
         <a class="btn btn-primary" href="#/brokers-trades">All Trades</a>
+        <br>
     </div>
-    <br>
     <div class="container" ng-show="nav.authenticated && nav.trader">
         <a class="btn btn-primary" href="#/traders-market">Market Overview for Traders</a>
         <a class="btn btn-primary" href="#/traders-trades">My Trades</a>
+        <br>
     </div>
     <div ng-view ng-show="nav.authenticated"></div>
     <div class="navbar-right">
