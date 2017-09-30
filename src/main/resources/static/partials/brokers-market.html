@@ -13,11 +13,10 @@
             <td>{{prc.symbol}}</td>
             <td>{{prc.price}}</td>
             <td>
-                <input type="number" step="0.01" id="spread" size="4" min="0" max="9999" ng-model="spread"
-                       value={{prc.spread}}/>
+                <input type="number" step="0.01" id="spread" size="4" min="0" max="9999" ng-model="prc.spread"/>
             </td>
             <td>
-                <button ng-click="updateSpread(prc,spread)">Update</button>
+                <button ng-click="updateSpread(prc,prc.spread)">Update</button>
             </td>
         </tr>
         </tbody>
