@@ -1,5 +1,4 @@
 <h1>Market Overview</h1>
-<br>
 <div ng-controller="PriceController as ctrl" data-ng-init="getAllPrices()">
     <label>Realtime: </label>
     <label class="switch">
@@ -34,7 +33,7 @@
         </tr>
         </tbody>
     </table>
-    <p style="color: green">{{message}}</p>
-    <p style="color: red">{{errorMessage}}</p>
+    <p class="p p-info">{{message}}</p>
+    <p class="p p-error">{{errorMessage}}</p>
     <br>
 </div>

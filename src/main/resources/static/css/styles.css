@@ -1,6 +1,208 @@
+p {
+    margin: 0 0 2em 0;
+}
+
+.p-error {
+    color: #fff !important;
+    background-color: #f44336 !important;
+    display: inline-block;
+}
+
+.p-info {
+    color: #fff !important;
+    background-color: #2196F3 !important;
+    display: inline-block;
+}
+
+body {
+    background-image: url("finance.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+form {
+    margin: 0 0 2em 0;
+}
+
+.brand {
+    color: seashell;
+    background-color: #3cadd4;
+    font-weight: 700;
+    font-size: x-large;
+    line-height: 1em;
+    margin: 0 0 1em 0;
+    text-decoration: none;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: #474747;
+    font-weight: 700;
+    line-height: 1em;
+    margin: 0 0 1em 0;
+}
+
+h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
+    color: inherit;
+    text-decoration: none;
+}
+
+label {
+    color: #474747;
+    display: block;
+    font-size: 0.9em;
+    font-weight: 700;
+    margin: 0 0 1em 0;
+}
+
+body, input, select, textarea {
+    color: #444;
+    font-family: "Raleway", Helvetica, sans-serif;
+    font-size: 13pt;
+    font-weight: 400;
+    line-height: 1.65em;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="email"]:focus,
+select:focus,
+textarea:focus {
+    border-color: #383b43;
+    box-shadow: 0 0 0 1px #383b43;
+}
+
+input[type="text"]:invalid,
+input[type="password"]:invalid,
+input[type="email"]:invalid,
+select:invalid,
+textarea:invalid {
+    box-shadow: none;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="email"],
+select {
+    height: 2.75em;
+}
+
+textarea {
+    padding: 0.75em 1em;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="email"],
+select,
+textarea {
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    -o-appearance: none;
+    -ms-appearance: none;
+    appearance: none;
+    background: white;
+    border-radius: 4px;
+    border: none;
+    color: inherit;
+    display: block;
+    outline: 0;
+    padding: 0 1em;
+    text-decoration: none;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="email"],
+select {
+    height: 2.75em;
+}
+
+textarea {
+    padding: 0.75em 1em;
+}
+
+button {
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    -o-appearance: none;
+    -ms-appearance: none;
+    appearance: none;
+    -moz-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+    -webkit-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+    -o-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+    -ms-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+    transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+    background-color: #3cadd4;
+    border-radius: 30px;
+    border: 0;
+    color: #ffffff !important;
+    cursor: pointer;
+    display: inline-block;
+    font-weight: 400;
+    height: 2.85em;
+    line-height: 2.95em;
+    padding: 0 2em;
+    text-align: center;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.btn-logout {
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    -o-appearance: none;
+    -ms-appearance: none;
+    appearance: none;
+    -moz-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+    -webkit-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+    -o-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+    -ms-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+    transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+    border-radius: 10px;
+    border: 0;
+    cursor: pointer;
+    display: inline-block;
+    font-weight: 400;
+    height: 0.95em;
+    line-height: 0.95em;
+    padding: 0 2em;
+    text-align: center;
+    text-decoration: none;
+    white-space: nowrap;
+    background-color: red;
+    color: seashell;
+}
+
+.btn-login {
+    height: 4.85em;
+    line-height: 4.95em;
+    width: 12em;
+    border-radius: 30px;
+}
+
+button:hover {
+    background-color: #51b6d9;
+    text-decoration: none;
+}
+
+button:active {
+    background-color: #2da2ca;
+    text-decoration: none;
+}
+
+.navbar-link {
+    color: red;
+}
+
 a {
     cursor: pointer;
-    background-color: lightblue;
+    background-color: rgba(144, 144, 144, 0.075);
+    font-size: medium;
+    color: #3cadd4;
+}
+
+a:active, a:hover {
+    text-decoration: underline;
 }
 
 table, th, td {
@@ -26,7 +228,9 @@ table tr:nth-child(even) {
 }
 
 /* Hide default HTML checkbox */
-.switch input {display:none;}
+.switch input {
+    display: none;
+}
 
 /* The slider */
 .slider {

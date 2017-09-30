@@ -1,5 +1,4 @@
 <h1>Trades</h1>
-<br>
 <div ng-controller="PriceController as ctrl" data-ng-init="getAllTrades()">
     <table ng-show="trades.length">
         <thead>
@@ -25,7 +24,7 @@
         </tr>
         </tbody>
     </table>
-    <p style="color: green">{{message}}</p>
-    <p style="color: red">{{errorMessage}}</p>
+    <p class="p p-info">{{message}}</p>
+    <p class="p p-error">{{errorMessage}}</p>
     <br>
 </div>

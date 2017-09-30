@@ -12,6 +12,7 @@
       class="ng-cloak">
 <div class="container">
     <a class="brand" href='#/'>Home</a>
+    <br>
     <div class="container" ng-show="nav.authenticated && nav.broker">
         <a class="btn btn-primary" href="#/brokers-market">Market Overview for Brokers</a>
         <a class="btn btn-primary" href="#/brokers-trades">All Trades</a>
@@ -24,7 +25,7 @@
     <div ng-view ng-show="nav.authenticated"></div>
     <div class="navbar-right">
         <a
-                class="btn btn-primary" ng-show="nav.authenticated" href=""
+                class="btn btn-logout" ng-show="nav.authenticated" href=""
                 ng-click="nav.logout()">logout</a>
         <p ng-show="nav.authenticated">
             Signed in as <a href="#/" class="navbar-link">{{nav.user}}</a>
@@ -41,12 +42,14 @@
                                                            class="form-control" id="username" name="username"
                                                            ng-model="nav.credentials.username"/>
         </div>
+        <br>
         <div class="form-group">
             <label for="password">Password:</label> <input type="password"
                                                            class="form-control" id="password" name="password"
                                                            ng-model="nav.credentials.password"/>
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <br>
+        <button type="submit" class="btn btn-login">Submit</button>
     </form>
 </div>
 <script type="text/ng-template" id="pages/brokers-market.html">
