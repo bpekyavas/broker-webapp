@@ -8,7 +8,6 @@
     <table ng-show="prices.length">
         <thead>
         <tr>
-            <th></th>
             <th>Symbol</th>
             <th>Bid</th>
             <th>Offer</th>
@@ -17,7 +16,6 @@
         </thead>
         <tbody ng-repeat="prc in prices | orderBy : 'symbol'">
         <tr>
-            <td>{{ $index + 1 }}</td>
             <td>{{prc.symbol}}</td>
             <td>{{prc.bid}}</td>
             <td>{{prc.offer}}</td>
