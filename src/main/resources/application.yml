@@ -1,10 +1,23 @@
-###
-#   Database Settings
-###
-logging:
-  level:
-    org.springframework.security: DEBUG
 spring:
+  application:
+    name: broker-webapp
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/broker
+    username: root
+    password:
+    continue-on-error: true
+  jpa:
+    hibernate:
+      ddl-auto: update
+      naming:
+        strategy: org.hibernate.cfg.ImprovedNamingStrategy
+    database: mysql
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    show-sql: false
+---
+spring:
+  profiles: development
   datasource:
     url: jdbc:h2:mem:example-app;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
     platform: h2
@@ -12,21 +25,10 @@ spring:
     password:
     driverClassName: org.h2.Driver
   jpa:
-    database-platform: org.hibernate.dialect.H2Dialect
     hibernate:
       ddl-auto: update
     properties:
       hibernate:
         use_sql_comments: true
         format_sql: true
-
-###
-#   H2 Settings
-###
-  h2:
-    console:
-      enabled: true
-      path: /console
-      settings:
-        trace: false
-        web-allow-others: false
+    database-platform: org.hibernate.dialect.H2Dialect

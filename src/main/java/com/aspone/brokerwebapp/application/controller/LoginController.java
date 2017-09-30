@@ -6,4 +6,5 @@ import java.util.Map;
 public interface LoginController {
 
     Map<String, Object> retrieveUserDetails(Principal user);
+
 }
