@@ -43,12 +43,18 @@
 <div class="container" ng-show="nav.authenticated && nav.broker">
     <a class="btn btn-primary" href="#/brokers-market">Market Overview for Brokers</a>
 </div>
-<br/>
+<div class="container" ng-show="nav.authenticated && nav.broker">
+    <a class="btn btn-primary" href="#/brokers-trades">All Trades</a>
+</div>
+<br>
 <div class="container" ng-show="nav.authenticated && nav.trader">
     <a class="btn btn-primary" href="#/traders-market">Market Overview for Traders</a>
 </div>
 <script type="text/ng-template" id="pages/brokers-market.html">
     <div ng-include src="'partials/brokers-market.html'"></div>
+</script>
+<script type="text/ng-template" id="pages/brokers-trades.html">
+    <div ng-include src="'partials/brokers-trades.html'"></div>
 </script>
 <script type="text/ng-template" id="pages/traders-market.html">
     <div ng-include src="'partials/traders-market.html'"></div>

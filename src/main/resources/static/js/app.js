@@ -10,6 +10,10 @@ app
                 templateUrl: 'pages/brokers-market.html',
                 controller: 'PriceController'
             })
+            .when('/brokers-trades', {
+                templateUrl: 'pages/brokers-trades.html',
+                controller: 'PriceController'
+            })
             .when('/traders-market', {
                 templateUrl: 'pages/traders-market.html',
                 controller: 'PriceController'
@@ -148,6 +152,24 @@ app
                         $scope.message = '';
                     });
         };
+
+        $scope.getAllTrades = function () {
+            PriceService.getAllTrades()
+                .then(function success(response) {
+                        $scope.trades = response.data.trades;
+                        $scope.message = '';
+                        $scope.errorMessage = '';
+                    },
+                    function error(response) {
+                        $scope.message = '';
+                        if (response.data.errorCode == "101") {
+                            $scope.errorMessage = 'No trades found!';
+                        }
+                        else {
+                            $scope.errorMessage = 'Error getting trades!';
+                        }
+                    });
+        };
     });
 
 app.service('PriceService', function ($http) {
@@ -196,5 +218,12 @@ app.service('PriceService', function ($http) {
             url: 'api/v1/prices/' + id,
             data: spreadData
         });
-    }
+    };
+
+    this.getAllTrades = function getAllTrades() {
+        return $http({
+            method: 'GET',
+            url: 'api/v1/trades'
+        });
+    };
 });

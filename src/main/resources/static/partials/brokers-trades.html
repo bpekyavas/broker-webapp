@@ -1,0 +1,31 @@
+<h1>Trades</h1>
+<br>
+<div ng-controller="PriceController as ctrl" data-ng-init="getAllTrades()">
+    <table ng-show="trades.length">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Date</th>
+            <th>Symbol</th>
+            <th>Trader</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Side</th>
+        </tr>
+        </thead>
+        <tbody ng-repeat="trade in trades | orderBy : 'symbol'">
+        <tr>
+            <td>{{trade.id}}</td>
+            <td>{{trade.date}}</td>
+            <td>{{trade.symbol}}</td>
+            <td>{{trade.traderName}}</td>
+            <td>{{trade.price}}</td>
+            <td>{{trade.quantity}}</td>
+            <td>{{trade.side}}</td>
+        </tr>
+        </tbody>
+    </table>
+    <p style="color: green">{{message}}</p>
+    <p style="color: red">{{errorMessage}}</p>
+    <br>
+</div>
