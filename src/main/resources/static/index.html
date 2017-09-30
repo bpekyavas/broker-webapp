@@ -12,14 +12,15 @@
       class="ng-cloak">
 <div class="container">
     <img src="css/logo.png"><br>
-    <a class="brand" href='#/' ng-show="nav.authenticated">Home</a>
     <div class="container" ng-show="nav.authenticated && nav.broker">
-        <a class="btn btn-primary" href="#/brokers-market">Market Overview for Brokers</a>
+        <a class="btn btn-home" href='#/' ng-show="nav.authenticated">Home</a>
+        <a class="btn btn-primary" href="#/brokers-market">Market Overview</a>
         <a class="btn btn-primary" href="#/brokers-trades">All Trades</a>
         <br>
     </div>
     <div class="container" ng-show="nav.authenticated && nav.trader">
-        <a class="btn btn-primary" href="#/traders-market">Market Overview for Traders</a>
+        <a class="btn btn-home" href='#/' ng-show="nav.authenticated">Home</a>
+        <a class="btn btn-primary" href="#/traders-market">Market Overview</a>
         <a class="btn btn-primary" href="#/traders-trades">My Trades</a>
         <br>
     </div>
@@ -28,8 +29,8 @@
         <a
                 class="btn btn-logout" ng-show="nav.authenticated" href=""
                 ng-click="nav.logout()">logout</a>
-        <p ng-show="nav.authenticated">
-            Signed in as <a href="#/" class="navbar-link">{{nav.user}}</a>
+        <p style="font-weight: bold" ng-show="nav.authenticated">
+            Signed in as <label class="user-info">{{nav.user}}</label>
         </p>
     </div>
 </div>

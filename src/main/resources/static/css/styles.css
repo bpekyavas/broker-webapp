@@ -30,7 +30,35 @@ form {
     margin: 0 0 2em 0;
 }
 
-.brand {
+.btn-home{
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    -o-appearance: none;
+    -ms-appearance: none;
+    appearance: none;
+    -moz-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+    -webkit-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+    -o-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+    -ms-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+    transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+    border-radius: 10px;
+    border: 0;
+    cursor: pointer;
+    display: inline-block;
+    height: 1.2em;
+    padding: 0 2em;
+    text-align: center;
+    white-space: nowrap;
+    color: #3cadd4;
+    background-color: seashell;
+    font-weight: 700;
+    font-size: large;
+    line-height: 1.1em;
+    margin: 0 0 1em 0;
+    text-decoration: none;
+}
+
+.btn-primary {
     -moz-appearance: none;
     -webkit-appearance: none;
     -o-appearance: none;
@@ -52,36 +80,9 @@ form {
     color: seashell;
     background-color: #3cadd4;
     font-weight: 700;
-    font-size: x-large;
+    font-size: large;
     line-height: 1.1em;
     margin: 0 0 1em 0;
-    text-decoration: none;
-}
-
-.btn-primary{
-    -moz-appearance: none;
-    -webkit-appearance: none;
-    -o-appearance: none;
-    -ms-appearance: none;
-    appearance: none;
-    -moz-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
-    -webkit-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
-    -o-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
-    -ms-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
-    transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
-    border-radius: 10px;
-    border: 0;
-    cursor: pointer;
-    display: inline-block;
-    height: 1.2em;
-    padding: 0 2em;
-    text-align: center;
-    white-space: nowrap;
-    cursor: pointer;
-    background-color: white;
-    font-size: medium;
-    line-height: 1.1em;
-    color: #3cadd4;
     text-decoration: none;
 }
 
@@ -220,7 +221,7 @@ button {
     text-align: center;
     text-decoration: none;
     white-space: nowrap;
-    background-color: red;
+    background-color: darkorange;
     color: seashell;
 }
 
@@ -239,8 +240,11 @@ button:active {
     text-decoration: none;
 }
 
-.navbar-link {
-    color: red;
+.user-info {
+    font-weight: bold;
+    color: darkorange;
+    text-decoration: none;
+    display: inline-block;
 }
 
 a {
