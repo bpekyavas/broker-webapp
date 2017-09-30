@@ -18,6 +18,10 @@ app
                 templateUrl: 'pages/traders-market.html',
                 controller: 'PriceController'
             })
+            .when('/traders-trades', {
+                templateUrl: 'pages/traders-trades.html',
+                controller: 'PriceController'
+            })
 
     })
     .service('SharedProperties', function () {
@@ -170,6 +174,24 @@ app
                         }
                     });
         };
+
+        $scope.getTradesByTraderId = function () {
+            PriceService.getTradesByTraderId(SharedProperties.getTraderId())
+                .then(function success(response) {
+                        $scope.trades = response.data.trades;
+                        $scope.message = '';
+                        $scope.errorMessage = '';
+                    },
+                    function error(response) {
+                        $scope.message = '';
+                        if (response.data.errorCode == "101") {
+                            $scope.errorMessage = 'No trades found!';
+                        }
+                        else {
+                            $scope.errorMessage = 'Error getting trades!';
+                        }
+                    });
+        };
     });
 
 app.service('PriceService', function ($http) {
@@ -224,6 +246,13 @@ app.service('PriceService', function ($http) {
         return $http({
             method: 'GET',
             url: 'api/v1/trades'
+        });
+    };
+
+    this.getTradesByTraderId = function getTradesByTraderId(traderId) {
+        return $http({
+            method: 'GET',
+            url: 'api/v1/trades/' + traderId
         });
     };
 });

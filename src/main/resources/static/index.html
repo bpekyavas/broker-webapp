@@ -12,6 +12,15 @@
       class="ng-cloak">
 <div class="container">
     <a class="brand" href='#/'>Home</a>
+    <div class="container" ng-show="nav.authenticated && nav.broker">
+        <a class="btn btn-primary" href="#/brokers-market">Market Overview for Brokers</a>
+        <a class="btn btn-primary" href="#/brokers-trades">All Trades</a>
+    </div>
+    <br>
+    <div class="container" ng-show="nav.authenticated && nav.trader">
+        <a class="btn btn-primary" href="#/traders-market">Market Overview for Traders</a>
+        <a class="btn btn-primary" href="#/traders-trades">My Trades</a>
+    </div>
     <div ng-view ng-show="nav.authenticated"></div>
     <div class="navbar-right">
         <a
@@ -40,16 +49,6 @@
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 </div>
-<div class="container" ng-show="nav.authenticated && nav.broker">
-    <a class="btn btn-primary" href="#/brokers-market">Market Overview for Brokers</a>
-</div>
-<div class="container" ng-show="nav.authenticated && nav.broker">
-    <a class="btn btn-primary" href="#/brokers-trades">All Trades</a>
-</div>
-<br>
-<div class="container" ng-show="nav.authenticated && nav.trader">
-    <a class="btn btn-primary" href="#/traders-market">Market Overview for Traders</a>
-</div>
 <script type="text/ng-template" id="pages/brokers-market.html">
     <div ng-include src="'partials/brokers-market.html'"></div>
 </script>
@@ -58,6 +57,9 @@
 </script>
 <script type="text/ng-template" id="pages/traders-market.html">
     <div ng-include src="'partials/traders-market.html'"></div>
+</script>
+<script type="text/ng-template" id="pages/traders-trades.html">
+    <div ng-include src="'partials/traders-trades.html'"></div>
 </script>
 </body>
 </html>

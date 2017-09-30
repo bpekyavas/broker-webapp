@@ -9,6 +9,7 @@ import com.aspone.brokerwebapp.application.model.response.PriceResponse;
 import com.aspone.brokerwebapp.domain.service.PriceService;
 import com.aspone.brokerwebapp.domain.vo.PriceVo;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -44,6 +45,7 @@ public class RestPriceController implements PriceController {
 
     @Override
     @PostMapping("/api/v1/prices/{securityId}")
+    @PreAuthorize("hasRole('ADMIN')")
     @ResponseStatus(HttpStatus.CREATED)
     public void updateSpread(@PathVariable Long securityId,@RequestBody UpdateSpreadRequest updateSpreadRequest) {
         priceService.updateSpread(securityId, updateSpreadRequest.getSpread());

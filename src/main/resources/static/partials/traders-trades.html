@@ -1,13 +1,12 @@
 <h1>Trades</h1>
 <br>
-<div ng-controller="PriceController as ctrl" data-ng-init="getAllTrades()">
+<div ng-controller="PriceController as ctrl" data-ng-init="getTradesByTraderId()">
     <table ng-show="trades.length">
         <thead>
         <tr>
             <th>ID</th>
             <th>Date</th>
             <th>Symbol</th>
-            <th>Trader</th>
             <th>Price</th>
             <th>Quantity</th>
             <th>Side</th>
@@ -18,7 +17,6 @@
             <td>{{trade.id}}</td>
             <td>{{trade.date}}</td>
             <td>{{trade.symbol}}</td>
-            <td>{{trade.traderName}}</td>
             <td>{{trade.price}}</td>
             <td>{{trade.quantity}}</td>
             <td>{{trade.side}}</td>
