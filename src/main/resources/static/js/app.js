@@ -38,7 +38,7 @@ app
     })
     .controller('LoginController',
 
-        function ($http, SharedProperties) {
+        function ($http, SharedProperties,$location) {
 
             var self = this;
 
@@ -60,7 +60,7 @@ app
                         self.user = data.name;
                         self.broker = data && data.roles && data.roles.indexOf("ROLE_ADMIN") > -1;
                         self.trader = data && data.roles && data.roles.indexOf("ROLE_USER") > -1;
-                        SharedProperties.setTraderId(data.traderId)
+                        SharedProperties.setTraderId(data.traderId);
                     } else {
                         self.authenticated = false;
                         self.broker = false;
@@ -78,6 +78,7 @@ app
 
             self.credentials = {};
             self.login = function () {
+                $location.path("/");
                 authenticate(self.credentials, function (authenticated) {
                     self.authenticated = authenticated;
                     self.error = !authenticated;
@@ -85,6 +86,7 @@ app
             };
 
             self.logout = function () {
+                $location.path("/");
                 $http.post('logout', {}).finally(function () {
                     self.authenticated = false;
                     self.broker = false;

@@ -2,6 +2,12 @@ p {
     margin: 0 0 2em 0;
 }
 
+.alert-danger{
+    color: #fff !important;
+    background-color: #f44336 !important;
+    display: inline-block;
+}
+
 .p-error {
     color: #fff !important;
     background-color: #f44336 !important;
