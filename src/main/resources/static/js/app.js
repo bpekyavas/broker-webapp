@@ -96,10 +96,12 @@ app
     .controller('PriceController', function ($scope, $interval, PriceService, SharedProperties) {
 
         var interval;
+        $scope.quantities = [];
+
 
         $scope.realTimeStateChanged = function (checked) {
             if (checked) {
-                interval = $interval($scope.getAllPrices, 1000);
+                interval = $interval($scope.getAllPrices, 5000);
             }
             else {
                 $interval.cancel(interval);

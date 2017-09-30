@@ -20,13 +20,13 @@
             <td>{{prc.bid}}</td>
             <td>{{prc.offer}}</td>
             <td>
-                <input type="number" id="quantity" size="4" min="1" max="9999" ng-model="quantity"/>
+                <input type="number" id="quantity" size="4" min="1" max="9999" ng-model="quantities[prc.id]"/>
             </td>
             <td>
-                <button ng-click="buy(prc,quantity)">Take</button>
+                <button ng-click="buy(prc,quantities[prc.id])">Take</button>
             </td>
             <td>
-                <button ng-click="sell(prc,quantity)">Hit</button>
+                <button ng-click="sell(prc,quantities[prc.id])">Hit</button>
             </td>
         </tr>
         </tbody>
