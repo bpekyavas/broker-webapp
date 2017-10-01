@@ -240,6 +240,22 @@ button {
     background-color: indianred;
 }
 
+.btn-buy {
+    background-color: #3cadd4;
+}
+
+.btn-buy:hover {
+    background-color: #51b6d9;
+}
+
+.btn-sell {
+    background-color: red;
+}
+
+.btn-sell:hover {
+    background-color: indianred;
+}
+
 
 button:hover {
     background-color: #51b6d9;

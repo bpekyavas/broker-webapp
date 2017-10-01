@@ -23,10 +23,10 @@
                 <input type="number" id="quantity" size="4" min="1" max="9999" ng-model="quantities[prc.id]"/>
             </td>
             <td>
-                <button ng-click="buy(prc,quantities[prc.id])">Take</button>
+                <button class="btn-buy" ng-click="buy(prc,quantities[prc.id])">BUY</button>
             </td>
             <td>
-                <button ng-click="sell(prc,quantities[prc.id])">Hit</button>
+                <button class="btn-sell" ng-click="sell(prc,quantities[prc.id])">SELL</button>
             </td>
         </tr>
         </tbody>
