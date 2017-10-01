@@ -1,5 +1,8 @@
+
+
 Broker WebApp
 ===================
+[![Build Status](https://travis-ci.org/msefaertekin/broker-webapp.svg?branch=master)](https://travis-ci.org/msefaertekin/broker-webapp)
 
 Broker WebApp project is a platform for brokers to provide trading services for traders.
 
