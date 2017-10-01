@@ -16,19 +16,12 @@ VALUES
 	(1, 'ROLE_USER'),
 	(2, 'ROLE_ADMIN');
 
-INSERT INTO application_user (id, user_name,password,application_role_id)
+INSERT INTO application_user (id, user_name,password)
 VALUES
-	(1, 'trader1','traderpass',1),
-	(2, 'trader2','traderpass',1),
-	(3, 'broker1','brokerpass',2),
-	(4, 'broker2','brokerpass',2);
-
-		INSERT INTO application_user_role (id, application_user_id, application_role_id)
-VALUES
-	(1, 1, 1),
-	(2, 2, 1),
-	(3, 3, 2),
-	(4, 4, 2);
+	(1, 'trader1','traderpass'),
+	(2, 'trader2','traderpass'),
+	(3, 'broker1','brokerpass'),
+	(4, 'broker2','brokerpass');
 
 INSERT INTO trader (id, name,application_user_id)
 VALUES

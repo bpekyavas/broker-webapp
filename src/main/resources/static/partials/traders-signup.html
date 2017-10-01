@@ -1,0 +1,36 @@
+<h1>Registration Form</h1>
+<div class="container" ng-controller="RegisterController as ctrl" ng-show="!nav.authenticated">
+    <form role="form" ng-submit="ctrl.register()">
+        <table>
+            <tr>
+                <div class="form-group">
+                    <td><label for="username">Username:</label>
+                    </td>
+                    <td><input type="text"
+                               class="form-control" id="username" name="username"
+                               ng-model="ctrl.inputs.username"/></td>
+                </div>
+            </tr>
+            <tr>
+                <div class="form-group">
+                    <td><label for="password">Password:</label></td>
+                    <td><input type="password"
+                               class="form-control" id="password" name="password"
+                               ng-model="ctrl.inputs.password"/></td>
+                </div>
+            </tr>
+            <tr>
+                <div class="form-group">
+                    <td><label>Name and Surname:</label></td>
+                    <td><input type="text"
+                               class="form-control" id="name" name="name"
+                               ng-model="ctrl.inputs.name"/></td>
+                </div>
+            </tr>
+        </table>
+        <p class="p p-info">{{message}}</p>
+        <p class="p p-error">{{errorMessage}}</p>
+        <br>
+        <button type="submit" class="btn btn-login">Register</button>
+    </form>
+</div>

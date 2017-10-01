@@ -22,25 +22,42 @@ app
                 templateUrl: 'pages/traders-trades.html',
                 controller: 'PriceController'
             })
+            .when('/traders-signup', {
+                templateUrl: 'pages/traders-signup.html',
+                controller: 'RegisterController'
+            })
 
     })
     .service('SharedProperties', function () {
         var traderId;
+        var signupClicked = false;
 
         return {
             getTraderId: function () {
-                return property;
+                return traderId;
             },
             setTraderId: function (value) {
-                property = value;
+                traderId = value;
+            },
+            getSignUpClicked: function () {
+                return signupClicked;
+            },
+            setSignUpClicked: function (value) {
+                signupClicked = value;
             }
         };
     })
     .controller('LoginController',
 
-        function ($http, SharedProperties,$location) {
+        function ($http, SharedProperties, $location) {
 
             var self = this;
+
+            self.signupClicked = SharedProperties.getSignUpClicked();
+
+            self.signup = function () {
+                self.signupClicked = true;
+            };
 
             var authenticate = function (credentials, callback) {
 
@@ -119,7 +136,7 @@ app
                     },
                     function error(response) {
                         $scope.message = '';
-                        $scope.errorMessage = 'Error getting prices!';
+                        $scope.errorMessage = response.data.errorMessage;
                     });
         };
 
@@ -130,7 +147,7 @@ app
                         $scope.errorMessage = '';
                     },
                     function error(response) {
-                        $scope.errorMessage = 'Error in matching!';
+                        $scope.errorMessage = response.data.errorMessage;
                         $scope.message = '';
                     });
 
@@ -143,7 +160,7 @@ app
                         $scope.errorMessage = '';
                     },
                     function error(response) {
-                        $scope.errorMessage = 'Error in matching!';
+                        $scope.errorMessage = response.data.errorMessage;
                         $scope.message = '';
                     });
 
@@ -156,7 +173,7 @@ app
                         $scope.errorMessage = '';
                     },
                     function error(response) {
-                        $scope.errorMessage = 'Error in spread update!';
+                        $scope.errorMessage = response.data.errorMessage;
                         $scope.message = '';
                     });
         };
@@ -170,12 +187,7 @@ app
                     },
                     function error(response) {
                         $scope.message = '';
-                        if (response.data.errorCode == "101") {
-                            $scope.errorMessage = 'No trades found!';
-                        }
-                        else {
-                            $scope.errorMessage = 'Error getting trades!';
-                        }
+                        $scope.errorMessage = response.data.errorMessage;
                     });
         };
 
@@ -188,15 +200,47 @@ app
                     },
                     function error(response) {
                         $scope.message = '';
-                        if (response.data.errorCode == "101") {
-                            $scope.errorMessage = 'No trades found!';
-                        }
-                        else {
-                            $scope.errorMessage = 'Error getting trades!';
-                        }
+                        $scope.errorMessage = response.data.errorMessage;
                     });
         };
-    });
+    })
+    .controller('RegisterController',
+
+        function ($http, $window, $scope, RegisterService, SharedProperties) {
+
+            var self = this;
+            self.inputs = {};
+
+            self.register = function () {
+                RegisterService.register(self.inputs.username, self.inputs.password, self.inputs.name)
+                    .then(function success(response) {
+                            $scope.message = 'Registration successful!';
+                            $scope.errorMessage = '';
+                            SharedProperties.setSignUpClicked(false);
+                            $window.location.href = "/";
+                        },
+                        function error(response) {
+                            $scope.errorMessage = response.data.errorMessage;
+                            $scope.message = '';
+                        });
+            };
+        });
+
+app.service('RegisterService', function ($http) {
+
+    this.register = function (username, password, name) {
+        var registerData = {
+            userName: username,
+            password: password,
+            name: name,
+        };
+        return $http({
+            method: 'POST',
+            url: 'api/v1/register',
+            data: registerData
+        });
+    }
+});
 
 app.service('PriceService', function ($http) {
 

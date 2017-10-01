@@ -24,7 +24,7 @@
         <a class="btn btn-primary" href="#/traders-trades">My Trades</a>
         <br>
     </div>
-    <div ng-view ng-show="nav.authenticated"></div>
+    <div ng-view></div>
     <div class="navbar-right">
         <a
                 class="btn btn-logout" ng-show="nav.authenticated" href=""
@@ -37,7 +37,7 @@
 <div class="alert alert-danger" ng-show="nav.error">There was a
     problem logging in. Please try again.
 </div>
-<div class="container" ng-show="!nav.authenticated">
+<div class="container" ng-show="!nav.authenticated && !nav.signupClicked">
     <form role="form" ng-submit="nav.login()">
         <div class="form-group">
             <label for="username">Username:</label> <input type="text"
@@ -51,7 +51,10 @@
                                                            ng-model="nav.credentials.password"/>
         </div>
         <br>
-        <button type="submit" class="btn btn-login">Submit</button>
+        <button type="submit" class="btn btn-login">Login</button>
+        <a href="#/traders-signup">
+            <button ng-click="nav.signup()" class="btn btn-login btn btn-signup">Sign Up</button>
+        </a>
     </form>
 </div>
 <script type="text/ng-template" id="pages/brokers-market.html">
@@ -65,6 +68,9 @@
 </script>
 <script type="text/ng-template" id="pages/traders-trades.html">
     <div ng-include src="'partials/traders-trades.html'"></div>
+</script>
+<script type="text/ng-template" id="pages/traders-signup.html">
+    <div ng-include src="'partials/traders-signup.html'"></div>
 </script>
 </body>
 </html>

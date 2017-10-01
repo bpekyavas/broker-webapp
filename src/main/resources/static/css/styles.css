@@ -227,8 +227,19 @@ button {
 
 .btn-login {
     border-radius: 30px;
-    font-size: large;
+    font-size: medium;
+    width: 6.8em;
+    padding: 0em;
 }
+
+.btn-signup {
+    background-color: red;
+}
+
+.btn-signup:hover {
+    background-color: indianred;
+}
+
 
 button:hover {
     background-color: #51b6d9;

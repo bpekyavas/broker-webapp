@@ -12,6 +12,7 @@ public class RestControllerExceptionHandler {
 
     private static String NOT_FOUND = "101";
     private static String SAVE_OR_UPDATE_FAILED = "102";
+    private static String VALIDATION_FAILED = "103";
 
     @ExceptionHandler({SecurityNotFoundBusinessException.class, TradesNotFoundBusinessException.class, TraderNotFoundBusinessException.class})
     public ResponseEntity<ErrorResponse> handleNotFoundBusinessException(Exception ex) {
@@ -21,6 +22,11 @@ public class RestControllerExceptionHandler {
     @ExceptionHandler({PriceUpdateBusinessException.class, SecurityUpdateBusinessException.class, TradeSaveBusinessException.class})
     public ResponseEntity<ErrorResponse> handleUpdateFailedBusinessException(Exception ex) {
         return getErrorResponseResponseEntity(SAVE_OR_UPDATE_FAILED, ex, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    @ExceptionHandler(StringValidationException.class)
+    public ResponseEntity<ErrorResponse> handleStringValidationException(Exception ex) {
+        return getErrorResponseResponseEntity(VALIDATION_FAILED, ex, HttpStatus.BAD_REQUEST);
     }
 
     private ResponseEntity<ErrorResponse> getErrorResponseResponseEntity(String errorCode, Exception ex, HttpStatus httpStatus) {

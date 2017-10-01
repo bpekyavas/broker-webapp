@@ -16,18 +16,7 @@ CREATE TABLE application_user (
   id   BIGINT(20)   NOT NULL AUTO_INCREMENT,
   user_name VARCHAR(255) NOT NULL,
   password VARCHAR(255) NOT NULL,
-  application_role_id BIGINT(20) NOT NULL,
-  PRIMARY KEY (id),
-    FOREIGN KEY (application_role_id) REFERENCES application_role (id)
-);
-
-CREATE TABLE application_user_role (
-  id   BIGINT(20)   NOT NULL AUTO_INCREMENT,
-  application_user_id BIGINT(20) NOT NULL,
-  application_role_id BIGINT(20) NOT NULL,
-  PRIMARY KEY (id),
-      FOREIGN KEY (application_user_id) REFERENCES application_user (id),
-      FOREIGN KEY (application_role_id) REFERENCES application_role (id)
+  PRIMARY KEY (id)
 );
 
 CREATE TABLE trader (

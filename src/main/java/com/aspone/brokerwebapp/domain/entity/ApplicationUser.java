@@ -17,10 +17,7 @@ public class ApplicationUser {
     @Column(name="password", nullable = false)
     private String password;
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinTable(name = "application_user_role",
-    joinColumns = @JoinColumn(name="application_user_id", referencedColumnName = "id"),
-    inverseJoinColumns = @JoinColumn(name = "application_role_id", referencedColumnName = "id"))
+    @ManyToMany
     private List<ApplicationRole> applicationRoles;
 
     public Long getId() {

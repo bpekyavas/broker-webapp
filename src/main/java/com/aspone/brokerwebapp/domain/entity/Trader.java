@@ -14,7 +14,7 @@ public class Trader {
     @Column(name = "name")
     private String name;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.EAGER,cascade=CascadeType.ALL)
     @JoinColumn(name = "application_user_id", referencedColumnName = "id", nullable = false)
     private ApplicationUser applicationUser;
 
