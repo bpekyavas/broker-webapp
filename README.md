@@ -53,14 +53,14 @@ and then
     
 Following users are predefined for testing purposes:
 
-**Brokers:**
+Brokers:
 
 Username     | Password
 -------- | ---
 broker1 | brokerpass
 broker2    | brokerpass
 
-**Traders:**
+Traders:
 
 Username     | Password
 -------- | ---
