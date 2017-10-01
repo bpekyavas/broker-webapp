@@ -3,9 +3,9 @@ spring:
     name: broker-webapp
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/broker
-    username: root
-    password:
+    url: jdbc:mysql://mysql:3306/broker
+    username: broker_user
+    password: broker_pass
     continue-on-error: true
   jpa:
     hibernate:

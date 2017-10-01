@@ -1,0 +1,25 @@
+version: "2.1"
+services:
+  broker-webapp-mysql:
+    image: mysql:latest
+    environment:
+      - MYSQL_ROOT_PASSWORD=password
+      - MYSQL_DATABASE=broker
+      - MYSQL_USER=broker_user
+      - MYSQL_PASSWORD=broker_pass
+    healthcheck:
+        test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+        timeout: 20s
+        retries: 10
+    ports:
+      - "33333:3306"
+  broker-webapp:
+    image: msefaertekin/broker-webapp:latest
+    ports:
+      - "8080:8080"
+    links:
+      - broker-webapp-mysql:mysql
+    depends_on:
+      broker-webapp-mysql:
+        condition: service_healthy
+
