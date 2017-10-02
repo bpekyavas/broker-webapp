@@ -87,7 +87,7 @@ Alternatively, you may add traders to the system from signup section.
   Brokers can see all trades occurred in the market.
     
 > ##### Market Overview for Traders:
-  Traders can see best bid and best offers in market. There is an option see the market in realtime. They can buy or sell stocks by specifying the quantity they want.
+  Traders can see best bid and best offers in market. There is an option to see the market in realtime. They can buy or sell stocks by specifying the quantity they want.
     
 > ##### My Trades	  
   Traders can see their trades occurred in the market.
