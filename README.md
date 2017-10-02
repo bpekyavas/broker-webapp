@@ -6,7 +6,7 @@ Broker WebApp
 
 Broker WebApp project is a platform for brokers to provide trading services for traders.
 
-### **How to run all the things?**
+### **How to start server?**
 
 #### **Docker Compose**
 
@@ -49,6 +49,12 @@ In order to run it first you need the following command
 and then
 
 	java -jar -Dspring.profiles.active=development ./target/broker-webapp-0.1.0.jar
+
+### **How to start clients?**
+
+Server runs on port 8080 by default in all options. This value can be overridden from docker-compose.yml or application.yml depending on the environment you work. So after you make sure the server is up and running clients can connect to:
+
+    http://localhost:8080
 
 ### **Features**
 
