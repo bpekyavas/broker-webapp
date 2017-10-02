@@ -94,4 +94,4 @@ Alternatively, you may add traders to the system from signup section.
 
 ### **Components**
 
-The application is designed to serve resources in **Rest API** architecture. **Java 8** and **Spring Boot** framework are used in backend services. **Mysql** DB is the primary choice in database layer.  In testing and development mode **H2** in-memory database is preferred. **Spring Security** secured application with its diverse configuration options. At front end **html5** is enriched with **Angular JS** dynamism. In addition, **Docker** is also effectively used to ease the deployment of the application.
+The application is designed to serve resources in **Rest API** architecture. **Java 8** and **Spring Boot** framework are used in backend services. **Mysql** DB is the primary choice in database layer.  In testing and development mode **H2** in-memory database is preferred. **Spring Security** secured application with its diverse configuration options. At front end **html5** is enriched with **Angular JS** dynamism. In addition, **Docker** is also effectively used to ease the deployment of the application.Package structure is organized in **hexagonal** architecture.
