@@ -40,7 +40,7 @@ and then
 
 #### **JAR File (Development Mode)**
 
-In this mode the application will be run in in-memory H2 database. 
+In this mode the application will be run in volatile in-memory H2 database. 
 
 In order to run it first you need the following command
 
