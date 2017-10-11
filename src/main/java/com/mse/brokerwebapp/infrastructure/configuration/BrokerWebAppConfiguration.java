@@ -10,7 +10,7 @@ import java.text.SimpleDateFormat;
 @Configuration
 public class BrokerWebAppConfiguration {
 
-    private static String JSON_DATETIME_PATTERN = "yyyy-MM-dd HH:mm:ss";
+    private static final String JSON_DATETIME_PATTERN = "yyyy-MM-dd HH:mm:ss";
 
     @Bean
     @Primary

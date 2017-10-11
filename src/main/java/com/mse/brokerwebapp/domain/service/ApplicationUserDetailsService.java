@@ -30,7 +30,7 @@ public class ApplicationUserDetailsService implements UserDetailsService {
     }
 
     @Override
-    public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(String s) {
         ApplicationUser applicationUser = applicationUserRepository.findByUserName(s);
         if (applicationUser != null) {
             Trader trader = traderRepository.findByApplicationUser(applicationUser);

@@ -28,7 +28,7 @@ public class RestLoginController implements LoginController {
 
     @RequestMapping("/user")
     public Map<String, Object> retrieveUserDetails(Principal user) {
-        Map<String, Object> map = new LinkedHashMap<String, Object>();
+        Map<String, Object> map = new LinkedHashMap<>();
         map.put("name", user.getName());
         map.put("roles", AuthorityUtils.authorityListToSet(((Authentication) user)
                 .getAuthorities()));

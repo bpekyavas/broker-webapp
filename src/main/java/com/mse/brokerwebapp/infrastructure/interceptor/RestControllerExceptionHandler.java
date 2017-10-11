@@ -10,9 +10,9 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @RestControllerAdvice
 public class RestControllerExceptionHandler {
 
-    private static String NOT_FOUND = "101";
-    private static String SAVE_OR_UPDATE_FAILED = "102";
-    private static String VALIDATION_FAILED = "103";
+    private static final String NOT_FOUND = "101";
+    private static final String SAVE_OR_UPDATE_FAILED = "102";
+    private static final String VALIDATION_FAILED = "103";
 
     @ExceptionHandler({SecurityNotFoundBusinessException.class, TradesNotFoundBusinessException.class, TraderNotFoundBusinessException.class})
     public ResponseEntity<ErrorResponse> handleNotFoundBusinessException(Exception ex) {
