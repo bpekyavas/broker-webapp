@@ -101,3 +101,9 @@ Alternatively, you may add traders to the system from signup section.
 ### **Components**
 
 The application is designed to serve resources in **Rest API** architecture. **Java 8** and **Spring Boot** framework are used in backend services. **Mysql** DB is the primary choice in database layer.  In testing and development mode **H2** in-memory database is preferred. **Spring Security** secured application with its diverse configuration options. At front end **html5** is enriched with **Angular JS** dynamism to have a desired **single page application**. In addition, **Docker** is also effectively used to ease the deployment of the application.Package structure is organized in **hexagonal** architecture. Continuous Integration(CI) is achieved by build automation features of **Travis CI**.
+
+### **Documentation**
+
+Swagger is used to list usage of API endpoints. Check following URL to see full documentation:
+
+	http://localhost:8080/swagger-ui.html
